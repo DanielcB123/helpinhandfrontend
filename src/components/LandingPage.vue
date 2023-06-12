@@ -73,7 +73,7 @@ export default {
     handleScroll() {
       clearTimeout(this.scrollTimer);
 
-      if (window.pageYOffset > this.prevScrollY) {
+      if (window.pageYOffset > this.prevScrollY || window.innerWidth >= 768) {
         // Scrolling down
         this.hideBottomNav = true;
       } else {
