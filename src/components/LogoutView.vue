@@ -1,3 +1,10 @@
+<template>
+  <div>
+    <h2>Logout</h2>
+    <button @click="logout">Logout</button>
+  </div>
+</template>
+
 <script>
 import axios from 'axios';
 

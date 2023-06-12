@@ -5,6 +5,8 @@ import LandingPage from './components/LandingPage.vue'
 import RegisterView from './components/RegisterView.vue'
 import LoginView from './components/LoginView.vue'
 import LogoutView from './components/LogoutView.vue'
+import ProtectedView from './components/ProtectedView.vue'; // Import your protected view component
+
 
 const routes = [
     {
@@ -37,7 +39,18 @@ const routes = [
         name: 'LogoutView',
         component: LogoutView
     },
-    // more routes here
+    {
+        path: '/protected',
+        name: 'ProtectedView',
+        component: ProtectedView, // Your protected view component
+        beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('token')) {
+            next('/login');
+            } else {
+            next();
+            }
+        }
+    }
 ]
 
 const router = createRouter({
