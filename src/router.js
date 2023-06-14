@@ -12,7 +12,10 @@ const routes = [
     {
         path: '/',
         name: 'landing',
-        component: LandingPage
+        component: LandingPage,
+        meta: {
+            title: 'HelpinHand'
+          }
     },
     {
         path: '/bandlist',
