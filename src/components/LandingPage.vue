@@ -1,22 +1,44 @@
 <template>
   <div class="bg-black flex flex-col min-h-screen">
+    <head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
     <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
       <div class="w-28 ml-2">
         <img src="@/assets/images/helpinhand-high-resolution-logo-color-on-transparent-background.png" alt="Logo" />
       </div>
-      <button class="mr-4 bg-blue-500 text-white px-4 py-3 rounded" @click="openLoginModal">Login</button>
+      <div class="button-container flex justify-end">
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">About</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">How It Works?</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">Sign Up</button>
+        <button class="mr-4 bg-blue-500 border border-white hover:bg-blue-600 text-white px-4 py-3 rounded" @click="openLoginModal">Login</button>
+      </div>
+
       <!-- Other top navigation content -->
     </div>
     <div class="flex w-screen flex-grow">
       <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
       <div class="w-screen h-auto" @scroll="handleScroll">
-        <div class="w-full h-full flex flex-wrap justify-around bg-white pt-10">
-            <div class="bg-white rounded border border-sky-300 w-2/5 h-96 bg-sky-50">
-              
+        <div class="w-full h-full flex flex-wrap justify-around bg-white">
+          <div class="flex justify-center items-center w-full h-36 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
+            "Join HelpinHand: Where Kindness Connects and Communities Thrive."
+          </div>
+          <div class="flex flex-wrap -mt-0">
+            <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
+              <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
             </div>
-            <div class="bg-white rounded border border-sky-300 w-2/5 h-96 bg-sky-50">
-              
+            <div class="bg-white w-1/2 h-96 p-5 ">
+              <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
+                HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support. Through our user-friendly platform, we inspire acts of kindness, bridge the gap between people, and create a world where helping others is a fundamental part of everyday life. Join the HelpinHand community and be a part of this powerful movement of compassion.
+              </span>
             </div>
+          </div>
+          <div class="w-full px-24">
+            <div class="w-full border-t border-blue-200">
+              <!-- bellow blue border -->
+            </div>
+          </div>
             
         </div>
           <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor metus, convallis id feugiat quis, finibus vel dolor. Nunc semper arcu leo, fermentum auctor turpis pretium quis. Duis lacinia, lacus sed porttitor laoreet, diam est interdum lacus, id consectetur est sapien eu mauris. Mauris a sem enim. Nullam vel fermentum justo, id feugiat est. Suspendisse ac sodales metus, ac consectetur diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean nec nulla aliquam, fringilla ipsum at, ornare odio. Curabitur vel dignissim erat. Nulla et purus quis ligula pretium iaculis. Etiam iaculis, magna ac facilisis elementum, quam mauris scelerisque lacus, non laoreet purus nunc laoreet diam. Donec ac ante vel ligula porta sollicitudin vitae vitae massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam placerat iaculis tellus, et imperdiet lacus interdum eget.
@@ -145,6 +167,7 @@ body {
 .bg-animation {
   /* background: linear-gradient(to right, #47668f 0%, #5275a3 50%, #47668f 100%); */
   background: linear-gradient(to right, #71a0dd 0%, #86b9fd 50%, #71a0dd 100%);
+  /* background: linear-gradient(to right, #71a0dd 0%, #558cd3 50%, #203b5e 100%); */
   background-size: 200% 100%;
   animation: arrowAnimation 20s linear infinite;
 }
@@ -157,4 +180,20 @@ body {
     background-position: 200% 50%;
   }
 }
+
+.button-container {
+  position: relative;
+}
+
+.button-container button {
+  background: linear-gradient(to top, #71a0dd 0%, #86b9fd 50%, #71a0dd 100%);
+  background-size: 100% 200%;
+  background-position: 0 0;
+  transition: background-position 1s;
+}
+
+.button-container button:hover {
+  background-position: 0 100%;
+}
+
 </style>
