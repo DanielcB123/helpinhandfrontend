@@ -93,11 +93,21 @@
 
       <button class="mr-4 bg-blue-500 text-white px-4 py-2 rounded" @click="openLoginModal">Login</button>
     </div>
-    <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div class="bg-white w-1/2 h-1/2 rounded p-4">
-        <LoginView @close="closeLoginModal" />
-      </div>
+<transition name="slide">
+    <div v-if="showLoginModal" class="fixed inset-0 flex items-center justify-center z-10">
+        <div class="bg-white w-1/2 h-1/2 rounded p-4">
+            <LoginView @close="closeLoginModal" />
+        </div>
     </div>
+</transition>
+<transition name="modal-bg-fade">
+  <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 modal-bg-fade"></div>
+</transition>
+
+
+
+
+
   </div>
 </template>
 
@@ -251,6 +261,53 @@ body {
   opacity: 1;
 }
 
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+}
+
+.slide-enter-active {
+  animation: slideInFromRight .3s ease-out forwards;
+}
+
+.slide-leave-active {
+  animation: slideOutToLeft .5s ease-in forwards;
+}
+
+
+.modal-bg-fade-enter-active,
+.modal-bg-fade-leave-active {
+  transition: opacity .7s;
+}
+
+.modal-bg-fade-enter,
+.modal-bg-fade-leave-to {
+  opacity: 0;
+}
 
 
 </style>

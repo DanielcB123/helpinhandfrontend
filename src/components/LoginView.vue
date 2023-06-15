@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Logins</h2>
+  <div class="">
+    <h2 class="">Loginsss</h2>
     <form @submit.prevent="login">
       <input type="text" v-model="username" placeholder="Username" required>
       <input type="password" v-model="password" placeholder="Password" required>
