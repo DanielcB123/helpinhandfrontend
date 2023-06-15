@@ -1,15 +1,18 @@
 <template>
-  <div class="bg-black flex flex-col min-h-screen">
+  <div class="bg-#86b9fd flex flex-col min-h-screen">
     <head>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
     <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
-      <div class="w-28 ml-2">
+      <div class="flex w-28 ml-2" style="font-family: 'Montserrat', sans-serif; color: #558ad3; font-size: 2rem;">
         <img src="@/assets/images/helpinhand-high-resolution-logo-color-on-transparent-background.png" alt="Logo" />
+                Connect
+
       </div>
       <div class="button-container flex justify-end">
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">About</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('home')">Home</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded"  @click="changeSection('about')">About</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">How It Works?</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">Sign Up</button>
         <button class="mr-4 bg-blue-500 border border-white hover:bg-blue-600 text-white px-4 py-3 rounded" @click="openLoginModal">Login</button>
@@ -17,11 +20,15 @@
 
       <!-- Other top navigation content -->
     </div>
-    <div class="flex w-screen flex-grow">
+
+
+    <!-- HOME -->
+    <transition name="fade"  mode="out-in">
+    <div v-if="visibleSection === 'home'"  class="flex w-screen flex-grow bg-white">
       <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
       <div class="w-screen h-auto" @scroll="handleScroll">
-        <div class="w-full h-full flex flex-wrap justify-around bg-white">
-          <div class="flex justify-center items-center w-full h-36 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
+        <div class="w-full h-auto flex flex-wrap justify-around bg-white">
+          <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
             "Join HelpinHand: Where Kindness Connects and Communities Thrive."
           </div>
           <div class="flex flex-wrap -mt-0">
@@ -35,31 +42,47 @@
             </div>
           </div>
           <div class="w-full px-24">
-            <div class="w-full border-t border-blue-200">
-              <!-- bellow blue border -->
+            <div class="w-full border-t border-blue-200 mt-8">
             </div>
           </div>
-            
         </div>
-          <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor metus, convallis id feugiat quis, finibus vel dolor. Nunc semper arcu leo, fermentum auctor turpis pretium quis. Duis lacinia, lacus sed porttitor laoreet, diam est interdum lacus, id consectetur est sapien eu mauris. Mauris a sem enim. Nullam vel fermentum justo, id feugiat est. Suspendisse ac sodales metus, ac consectetur diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean nec nulla aliquam, fringilla ipsum at, ornare odio. Curabitur vel dignissim erat. Nulla et purus quis ligula pretium iaculis. Etiam iaculis, magna ac facilisis elementum, quam mauris scelerisque lacus, non laoreet purus nunc laoreet diam. Donec ac ante vel ligula porta sollicitudin vitae vitae massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam placerat iaculis tellus, et imperdiet lacus interdum eget.
-
-  Proin vel nisi ut nulla posuere varius sagittis nec lorem. Curabitur eu elit ipsum. Sed placerat, ante venenatis aliquam accumsan, libero massa viverra magna, vel ullamcorper libero libero at nulla. Mauris accumsan consequat accumsan. Nullam sed velit posuere, vulputate leo eu, molestie lacus. Aliquam erat volutpat. Maecenas sit amet eleifend felis. Ut posuere tincidunt elit, vel consectetur enim vestibulum id. Maecenas malesuada tortor quis nunc mattis ullamcorper.
-
-  Suspendisse ultricies mauris vitae augue pharetra, a egestas odio laoreet. Vivamus porttitor felis arcu. Nulla enim lorem, euismod lobortis eros id, vestibulum cursus nulla. In commodo accumsan aliquam. Praesent erat nulla, bibendum id quam non, scelerisque accumsan purus. Morbi eu ex non metus vehicula tempus vel at purus. Donec laoreet tincidunt vulputate. Nunc faucibus, nisl ac semper egestas, est magna condimentum lacus, vel pretium ligula mauris sed ligula. In facilisis ornare quam, in eleifend ligula porttitor ornare. In nec odio augue. Nam quis turpis ipsum. Vivamus tincidunt convallis feugiat.
-
-  Ut massa mauris, euismod nec congue eu, venenatis eget augue. Vivamus ultricies libero sed pellentesque porta. Sed hendrerit a sapien id mattis. Duis sit amet ipsum molestie, egestas mauris vitae, condimentum lectus. In ultricies nunc et ipsum placerat eleifend. Vestibulum placerat, libero nec lobortis porttitor, lorem velit auctor metus, sed mollis nisi eros a metus. Ut id mauris ultricies, varius mauris eu, faucibus orci. Morbi ullamcorper rhoncus dolor eget pharetra.
-
-  Morbi maximus rhoncus leo sed eleifend. Proin vitae est imperdiet, blandit tellus eu, interdum leo. Sed sodales elit sit amet erat aliquet vulputate. Integer id nibh mollis, faucibus tortor ac, scelerisque nisl. Donec sit amet lacinia purus. Aenean sed turpis tortor. Duis id ipsum in velit fringilla pulvinar ac at ligula. Suspendisse pharetra non arcu id convallis. Nunc risus augue, fermentum a lectus eu, iaculis rutrum dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dolor metus, convallis id feugiat quis, finibus vel dolor. Nunc semper arcu leo, fermentum auctor turpis pretium quis. Duis lacinia, lacus sed porttitor laoreet, diam est interdum lacus, id consectetur est sapien eu mauris. Mauris a sem enim. Nullam vel fermentum justo, id feugiat est. Suspendisse ac sodales metus, ac consectetur diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean nec nulla aliquam, fringilla ipsum at, ornare odio. Curabitur vel dignissim erat. Nulla et purus quis ligula pretium iaculis. Etiam iaculis, magna ac facilisis elementum, quam mauris scelerisque lacus, non laoreet purus nunc laoreet diam. Donec ac ante vel ligula porta sollicitudin vitae vitae massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam placerat iaculis tellus, et imperdiet lacus interdum eget.
-
-  Proin vel nisi ut nulla posuere varius sagittis nec lorem. Curabitur eu elit ipsum. Sed placerat, ante venenatis aliquam accumsan, libero massa viverra magna, vel ullamcorper libero libero at nulla. Mauris accumsan consequat accumsan. Nullam sed velit posuere, vulputate leo eu, molestie lacus. Aliquam erat volutpat. Maecenas sit amet eleifend felis. Ut posuere tincidunt elit, vel consectetur enim vestibulum id. Maecenas malesuada tortor quis nunc mattis ullamcorper.
-
-  Suspendisse ultricies mauris vitae augue pharetra, a egestas odio laoreet. Vivamus porttitor felis arcu. Nulla enim lorem, euismod lobortis eros id, vestibulum cursus nulla. In commodo accumsan aliquam. Praesent erat nulla, bibendum id quam non, scelerisque accumsan purus. Morbi eu ex non metus vehicula tempus vel at purus. Donec laoreet tincidunt vulputate. Nunc faucibus, nisl ac semper egestas, est magna condimentum lacus, vel pretium ligula mauris sed ligula. In facilisis ornare quam, in eleifend ligula porttitor ornare. In nec odio augue. Nam quis turpis ipsum. Vivamus tincidunt convallis feugiat.
-
-  Ut massa mauris, euismod nec congue eu, venenatis eget augue. Vivamus ultricies libero sed pellentesque porta. Sed hendrerit a sapien id mattis. Duis sit amet ipsum molestie, egestas mauris vitae, condimentum lectus. In ultricies nunc et ipsum placerat eleifend. Vestibulum placerat, libero nec lobortis porttitor, lorem velit auctor metus, sed mollis nisi eros a metus. Ut id mauris ultricies, varius mauris eu, faucibus orci. Morbi ullamcorper rhoncus dolor eget pharetra.
-
-  Morbi maximus rhoncus leo sed eleifend. Proin vitae est imperdiet, blandit tellus eu, interdum leo. Sed sodales elit sit amet erat aliquet vulputate. Integer id nibh mollis, faucibus tortor ac, scelerisque nisl. Donec sit amet lacinia purus. Aenean sed turpis tortor. Duis id ipsum in velit fringilla pulvinar ac at ligula. Suspendisse pharetra non arcu id convallis. Nunc risus augue, fermentum a lectus eu, iaculis rutrum dolor. -->
       </div>
     </div>
+    </transition>
+
+
+    <!-- ABOUT -->
+    <transition name="fade"  mode="out-in">
+    <div v-if="visibleSection === 'about'" class="flex w-screen flex-grow bg-white">
+      <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
+      <div class="w-screen h-auto" @scroll="handleScroll">
+        <div class="w-full h-auto flex flex-wrap justify-around bg-white">
+          <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
+            about          
+          </div>
+          <div class="flex flex-wrap -mt-0">
+            <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
+              <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
+            </div>
+            <div class="bg-white w-1/2 h-96 p-5 ">
+              <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
+                about              
+              </span>
+            </div>
+          </div>
+          <div class="w-full px-24">
+            <div class="w-full border-t border-blue-200 mt-8">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </transition>
+
+
+
+
+
     <div
       class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300"
       :class="{ 'hidden': hideBottomNav }"
@@ -90,7 +113,8 @@ export default {
       scrollTimer: null,
       prevScrollY: 0,
       showLoginModal: false,
-      logo: logo
+      logo: logo,
+      visibleSection: null, 
     };
   },
 
@@ -145,8 +169,22 @@ export default {
     },
     closeLoginModal() {
       this.showLoginModal = false;
-    }
+    },
+    changeSection(newSection) {
+    // First, set the current section to null to hide it
+    this.visibleSection = null;
+
+    // Then, use $nextTick to wait until the DOM update (and thus the fade out) is complete
+    this.$nextTick(() => {
+      // Use a JavaScript timeout to add a slight delay
+      setTimeout(() => {
+        // After the delay, set the new section to make it start fading in
+        this.visibleSection = newSection;
+      }, 100);  // Adjust the delay as needed to create the desired effect
+    });
   },
+  },
+
   components: {
     LoginView
   }
@@ -189,11 +227,30 @@ body {
   background: linear-gradient(to top, #71a0dd 0%, #86b9fd 50%, #71a0dd 100%);
   background-size: 100% 200%;
   background-position: 0 0;
-  transition: background-position 1s;
+  transition: background-position .8s;
 }
 
 .button-container button:hover {
   background-position: 0 100%;
 }
+
+
+.fade-enter-active {
+  transition: opacity .66s;
+}
+
+.fade-leave-active {
+  transition: opacity 0s;
+}
+
+.fade-enter-from, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.fade-enter-to, .fade-leave-from /* .fade-leave below version 2.1.8 */ {
+  opacity: 1;
+}
+
+
 
 </style>

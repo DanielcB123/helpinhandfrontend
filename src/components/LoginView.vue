@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h2>Login</h2>
+    <h2>Logins</h2>
     <form @submit.prevent="login">
       <input type="text" v-model="username" placeholder="Username" required>
       <input type="password" v-model="password" placeholder="Password" required>
       <button type="submit">Login</button>
+      <button type="button" @click="cancel">Cancel</button>
     </form>
     <p class="error" v-if="error">{{ error }}</p>
   </div>
@@ -44,6 +45,9 @@ export default {
           this.error = 'Error: ' + error.message;
         }
       }
+    },
+    cancel() {
+      this.$emit('close');
     }
   }
 }
