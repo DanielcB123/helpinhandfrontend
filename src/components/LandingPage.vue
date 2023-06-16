@@ -7,7 +7,7 @@
     </head>
 
     <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
-      <div class="flex w-28 ml-2" style="font-family: 'Montserrat', sans-serif; color: #558ad3; font-size: 2rem;">
+      <div class="flex w-28 ml-2 text-sm md:text-3xl " style="font-family: 'Montserrat', sans-serif; color: #558ad3;">
         <img src="@/assets/images/logo2.png" alt="Logo" />
         Connect
       </div>
@@ -31,18 +31,21 @@
             <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
               "Join HelpinHand: Where Kindness Connects and Communities Thrive."
             </div>
-            <div class="flex flex-wrap -mt-0">
-              <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
+
+            <div class="bock md:flex md:flex-wrap -mt-0 block">
+              <div class="bg-white rounded-3xl border-r border-sky-200 md:w-1/2 h-96 bg-sky-200">
                 <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
               </div>
-              <div class="bg-white w-1/2 h-96 p-5 ">
+              <div class="bg-white md:w-1/2 h-96 p-5 ">
                 <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
                   HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support. Through our user-friendly platform, we inspire acts of kindness, bridge the gap between people, and create a world where helping others is a fundamental part of everyday life. Join the HelpinHand community and be a part of this powerful movement of compassion.
                 </span>
               </div>
             </div>
+
+
             <div class="w-full px-24">
-              <div class="w-full border-t border-blue-200 mt-8"></div>
+              <div class="w-full border-t border-blue-200 mt-8 pb-5"></div>
               <div class="" v-if="isSmallScreen">
                 <image-carousel></image-carousel>
               </div>
@@ -85,12 +88,18 @@
       </div>
     </transition>
 
-    <div class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300" :class="{ 'hidden': hideBottomNav }">
+
+<!-- Bottom mobile nav -->
+    <div class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300 z-10" :class="{ 'hidden': hideBottomNav }">
       <div class="w-28 ml-2">
         <img src="@/assets/images/logo2.png" alt="Logo" />
       </div>
       <button class="mr-4 bg-blue-500 text-white px-4 py-2 rounded" @click="openLoginModal">Login</button>
     </div>
+
+
+
+
     <transition name="slide">
       <div v-if="showLoginModal" class="fixed inset-0 flex items-center justify-center z-10">
         <div class="bg-white w-1/2 h-1/2 rounded p-4">
