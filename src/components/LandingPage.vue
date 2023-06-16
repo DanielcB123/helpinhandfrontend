@@ -1,14 +1,13 @@
 <template>
   <div class="bg-#86b9fd flex flex-col min-h-screen">
     <head>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-</head>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    </head>
 
     <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
       <div class="flex w-28 ml-2" style="font-family: 'Montserrat', sans-serif; color: #558ad3; font-size: 2rem;">
-        <img src="@/assets/images/helpinhand-high-resolution-logo-color-on-transparent-background.png" alt="Logo" />
-                Connect
-
+        <img src="@/assets/images/logo2.png" alt="Logo" />
+        Connect
       </div>
       <div class="button-container flex justify-end">
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('home')">Home</button>
@@ -21,100 +20,96 @@
       <!-- Other top navigation content -->
     </div>
 
-
     <!-- HOME -->
     <transition name="fade"  mode="out-in">
-    <div v-if="visibleSection === 'home'"  class="flex w-screen flex-grow bg-white">
-      <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
-      <div class="w-screen h-auto" @scroll="handleScroll">
-        <div class="w-full h-auto flex flex-wrap justify-around bg-white">
-          <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
-            "Join HelpinHand: Where Kindness Connects and Communities Thrive."
-          </div>
-          <div class="flex flex-wrap -mt-0">
-            <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
-              <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
+      <div v-if="visibleSection === 'home'"  class="flex w-screen flex-grow bg-white">
+        <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
+        <div class="w-screen h-auto" @scroll="handleScroll">
+          <div class="w-full h-auto flex flex-wrap justify-around bg-white">
+            <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
+              "Join HelpinHand: Where Kindness Connects and Communities Thrive."
             </div>
-            <div class="bg-white w-1/2 h-96 p-5 ">
-              <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
-                HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support. Through our user-friendly platform, we inspire acts of kindness, bridge the gap between people, and create a world where helping others is a fundamental part of everyday life. Join the HelpinHand community and be a part of this powerful movement of compassion.
-              </span>
+            <div class="flex flex-wrap -mt-0">
+              <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
+                <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
+              </div>
+              <div class="bg-white w-1/2 h-96 p-5 ">
+                <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
+                  HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support. Through our user-friendly platform, we inspire acts of kindness, bridge the gap between people, and create a world where helping others is a fundamental part of everyday life. Join the HelpinHand community and be a part of this powerful movement of compassion.
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="w-full px-24">
-            <div class="w-full border-t border-blue-200 mt-8">
+            <div class="w-full px-24">
+              <div class="w-full border-t border-blue-200 mt-8"></div>
+<div class="" v-if="isSmallScreen">
+  <image-carousel></image-carousel>
+</div>
+
+<div class="" v-else>
+  <mobile-image-carousel></mobile-image-carousel>
+</div>
+
+
             </div>
           </div>
         </div>
       </div>
-    </div>
     </transition>
-
 
     <!-- ABOUT -->
     <transition name="fade"  mode="out-in">
-    <div v-if="visibleSection === 'about'" class="flex w-screen flex-grow bg-white">
-      <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
-      <div class="w-screen h-auto" @scroll="handleScroll">
-        <div class="w-full h-auto flex flex-wrap justify-around bg-white">
-          <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
-            about          
-          </div>
-          <div class="flex flex-wrap -mt-0">
-            <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
-              <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
+      <div v-if="visibleSection === 'about'" class="flex w-screen flex-grow bg-white">
+        <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
+        <div class="w-screen h-auto" @scroll="handleScroll">
+          <div class="w-full h-auto flex flex-wrap justify-around bg-white">
+            <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
+              about
             </div>
-            <div class="bg-white w-1/2 h-96 p-5 ">
-              <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
-                about              
-              </span>
+            <div class="flex flex-wrap -mt-0">
+              <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
+                <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
+              </div>
+              <div class="bg-white w-1/2 h-96 p-5 ">
+                <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
+                  about
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="w-full px-24">
-            <div class="w-full border-t border-blue-200 mt-8">
+            <div class="w-full px-24">
+              <div class="w-full border-t border-blue-200 mt-8"></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </transition>
 
-
-
-
-
-    <div
-      class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300"
-      :class="{ 'hidden': hideBottomNav }"
-    >
+    <div class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300" :class="{ 'hidden': hideBottomNav }">
       <div class="w-28 ml-2">
-        <img src="@/assets/images/helpinhand-high-resolution-logo-color-on-transparent-background.png" alt="Logo" />
+        <img src="@/assets/images/logo2.png" alt="Logo" />
       </div>
-
       <button class="mr-4 bg-blue-500 text-white px-4 py-2 rounded" @click="openLoginModal">Login</button>
     </div>
-<transition name="slide">
-    <div v-if="showLoginModal" class="fixed inset-0 flex items-center justify-center z-10">
+    <transition name="slide">
+      <div v-if="showLoginModal" class="fixed inset-0 flex items-center justify-center z-10">
         <div class="bg-white w-1/2 h-1/2 rounded p-4">
-            <LoginView @close="closeLoginModal" />
+          <LoginView @close="closeLoginModal" />
         </div>
-    </div>
-</transition>
-<transition name="modal-bg-fade">
-  <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 modal-bg-fade"></div>
-</transition>
-
-
-
-
-
+      </div>
+    </transition>
+    <transition name="modal-bg-fade">
+      <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 modal-bg-fade"></div>
+    </transition>
   </div>
 </template>
 
 <script>
 import LoginView from '@/components/LoginView.vue';
-import logo from '@/assets/images/logo.png';
+import logo from '@/assets/images/logo2.png';
+import ImageCarousel from './ImageCarousel.vue';  // adjust the path based on your project structure
+import MobileImageCarousel from './MobileImageCarousel.vue'; 
 
+// import logo from '@/assets/images/logo2.png';
+// import logo from '@/assets/images/help_stairs.jpg';
 export default {
   data() {
     return {
@@ -124,11 +119,22 @@ export default {
       prevScrollY: 0,
       showLoginModal: false,
       logo: logo,
-      visibleSection: null, 
+      visibleSection: 'home',
+      windowWidth: 0,
+      currentSlideIndex: 0,
+      slides: [
+        { src: './assets/images/logo2.png', alt: 'Image 1' },
+      ],
     };
   },
-
-
+  computed: {
+    currentSlide() {
+      return this.slides[this.currentSlideIndex];
+    },
+    isSmallScreen() {
+      return this.windowWidth <= 786;
+    },
+  },
   beforeRouteEnter(to, from, next) {
     document.title = to.meta.title;
     next();
@@ -137,20 +143,28 @@ export default {
     document.title = to.meta.title;
     next();
   },
-
+  created() {
+    window.addEventListener('resize', this.updateWindowWidth);
+    this.updateWindowWidth();
+  },
   mounted() {
+    this.updateWindowWidth();
     window.addEventListener('resize', this.handleScreenResize);
     this.handleScreenResize();
     window.addEventListener('scroll', this.handleScroll);
-
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.handleScreenResize);
     window.removeEventListener('scroll', this.handleScroll);
   },
+
   methods: {
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth;
+      // this.isLargeScreen = this.windowWidth > 786;
+    },
     handleScreenResize() {
-      this.isLargeScreen = (window.innerWidth >= 768 || window.scrollY === 0) ;
+      this.isLargeScreen = window.innerWidth >= 768 || window.scrollY === 0;
       this.hideBottomNav = window.innerWidth >= 768 || window.scrollY === 0;
     },
     handleScroll() {
@@ -181,23 +195,32 @@ export default {
       this.showLoginModal = false;
     },
     changeSection(newSection) {
-    // First, set the current section to null to hide it
-    this.visibleSection = null;
+      // First, set the current section to null to hide it
+      this.visibleSection = null;
 
-    // Then, use $nextTick to wait until the DOM update (and thus the fade out) is complete
-    this.$nextTick(() => {
-      // Use a JavaScript timeout to add a slight delay
-      setTimeout(() => {
-        // After the delay, set the new section to make it start fading in
-        this.visibleSection = newSection;
-      }, 100);  // Adjust the delay as needed to create the desired effect
-    });
-  },
+      // Then, use $nextTick to wait until the DOM update (and thus the fade out) is complete
+      this.$nextTick(() => {
+        // Use a JavaScript timeout to add a slight delay
+        setTimeout(() => {
+          // After the delay, set the new section to make it start fading in
+          this.visibleSection = newSection;
+        }, 100);  // Adjust the delay as needed to create the desired effect
+      });
+    },
+    nextSlide() {
+      this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
+    },
+    prevSlide() {
+      this.currentSlideIndex =
+        (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
+    },
   },
 
   components: {
-    LoginView
-  }
+    LoginView,
+    ImageCarousel,
+    MobileImageCarousel
+  },
 };
 </script>
 
@@ -306,6 +329,26 @@ body {
 
 .modal-bg-fade-enter,
 .modal-bg-fade-leave-to {
+  opacity: 0;
+}
+
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
