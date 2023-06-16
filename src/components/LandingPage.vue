@@ -1,4 +1,6 @@
 <template>
+<div class="w-screen h-auto no-scrollbar" @scroll="handleScroll">
+
   <div class="bg-#86b9fd flex flex-col min-h-screen">
     <head>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -11,8 +13,8 @@
       </div>
       <div class="button-container flex justify-end">
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('home')">Home</button>
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded"  @click="changeSection('about')">About</button>
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">How It Works?</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">About</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">How It Works?</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">Sign Up</button>
         <button class="mr-4 bg-blue-500 border border-white hover:bg-blue-600 text-white px-4 py-3 rounded" @click="openLoginModal">Login</button>
       </div>
@@ -41,13 +43,13 @@
             </div>
             <div class="w-full px-24">
               <div class="w-full border-t border-blue-200 mt-8"></div>
-<div class="" v-if="isSmallScreen">
-  <image-carousel></image-carousel>
-</div>
+              <div class="" v-if="isSmallScreen">
+                <image-carousel></image-carousel>
+              </div>
 
-<div class="" v-else>
-  <mobile-image-carousel></mobile-image-carousel>
-</div>
+              <div class="" v-else>
+                <mobile-image-carousel></mobile-image-carousel>
+              </div>
 
 
             </div>
@@ -100,6 +102,7 @@
       <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 modal-bg-fade"></div>
     </transition>
   </div>
+</div>
 </template>
 
 <script>
@@ -342,14 +345,24 @@ body {
   opacity: 0;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+.fade-enter-active{
+  transition: opacity .66s;
 }
-
+.fade-leave-active{
+  transition: opacity 0s;
+}
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.no-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; 
 }
 
 
