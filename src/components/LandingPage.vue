@@ -33,11 +33,15 @@
             </div>
 
             <div class="bock md:flex md:flex-wrap -mt-0 block">
-              <div class="bg-white rounded-3xl border-r border-sky-200 md:w-1/2 h-96 bg-sky-200">
+              <!-- <div class="bg-white rounded-3xl border-r border-sky-200 md:w-1/2 h-96 bg-sky-200">
                 <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
+              </div> -->
+              <div class="bg-white rounded-3xl border-r border-sky-200 md:w-1/2 h-96 bg-sky-200 flex justify-end">
+                  <img class="custom-img" src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
               </div>
+
               <div class="bg-white md:w-1/2 h-96 p-5 ">
-                <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
+                <span class="main-header sm:text-xl md:text-xl lg:text-2xl" style="font-family: 'Montserrat', sans-serif; color: #558cd3;">
                   HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support. Through our user-friendly platform, we inspire acts of kindness, bridge the gap between people, and create a world where helping others is a fundamental part of everyday life. Join the HelpinHand community and be a part of this powerful movement of compassion.
                 </span>
               </div>
@@ -374,5 +378,10 @@ body {
   display: none; 
 }
 
+@media (min-width: 900px) {
+.main-header{
+  font-size: 2px;
+}
+}
 
 </style>
