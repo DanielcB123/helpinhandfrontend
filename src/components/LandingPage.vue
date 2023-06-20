@@ -7,11 +7,11 @@
     </head>
 
     <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
-      <div class="flex w-28 ml-2 text-sm md:text-3xl " style="font-family: 'Montserrat', sans-serif; color: #558ad3;">
+      <div class="w-28 ml-2 hidden md:flex md:text-sm " style="font-family: 'Montserrat', sans-serif; color: #558ad3;">
         <img src="@/assets/images/logo2.png" alt="Logo" />
         Connect
       </div>
-      <div class="button-container flex justify-end">
+      <div class="button-container flex justify-end px-2">
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('home')">Home</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">About</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">How It Works?</button>
@@ -28,7 +28,7 @@
         <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
         <div class="w-screen h-auto" @scroll="handleScroll">
           <div class="w-full h-auto flex flex-wrap justify-around bg-white">
-            <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
+            <div class="flex justify-center items-center w-full h-auto bg-sky-50 px-3" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;padding-top:1rem;padding-bottom:.5rem">
               "Join HelpinHand: Where Kindness Connects and Communities Thrive."
             </div>
 
@@ -71,22 +71,7 @@
         <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
         <div class="w-screen h-auto" @scroll="handleScroll">
           <div class="w-full h-auto flex flex-wrap justify-around bg-white">
-            <div class="flex justify-center items-center w-full h-16 bg-sky-50" style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 26px;">
-              about
-            </div>
-            <div class="flex flex-wrap -mt-0">
-              <div class="bg-white rounded-3xl border-r border-sky-200 w-1/2 h-96 bg-sky-200">
-                <img src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
-              </div>
-              <div class="bg-white w-1/2 h-96 p-5 ">
-                <span style="font-family: 'Montserrat', sans-serif; color: #558cd3; font-size: 24px;">
-                  about
-                </span>
-              </div>
-            </div>
-            <div class="w-full px-24">
-              <div class="w-full border-t border-blue-200 mt-8"></div>
-            </div>
+            About
           </div>
         </div>
       </div>

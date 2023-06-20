@@ -20,10 +20,12 @@ export default {
     return {
       currentSlideIndex: 0,
       slides: [
-        { src: "./assets/images/image1.jpg", alt: "Image 1" },
-        { src: "./assets/images/image2.jpg", alt: "Image 2" },
-        { src: "./assets/images/image3.jpg", alt: "Image 3" },
-        // Add as many slides as you need
+          { src: require("../assets/images/hands.jpg"),  alt: "Image 1" },
+          { src: require("../assets/images/helpingfood.png"), alt: "Image 2" },
+          { src: require("../assets/images/helpingplants1.jpg"), alt: "Image 3" },
+          { src: require("../assets/images/helpingmove.png"), alt: "Image 4" },
+          { src: require("../assets/images/helpingplants2.jpeg"), alt: "Image 5" },
+          { src: require("../assets/images/volunteer.jpg"), alt: "Image 6" },
       ],
     };
   },
