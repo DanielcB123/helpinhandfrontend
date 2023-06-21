@@ -7,10 +7,13 @@
     </head>
 
     <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
-      <div class="w-28 ml-2 hidden md:flex md:text-sm " style="font-family: 'Montserrat', sans-serif; color: #558ad3;">
-        <img src="@/assets/images/logo2.png" alt="Logo" />
-        Connect
+      <div class="circle-div w-auto ml-2 hidden md:flex md:text-sm bg-sky-100">
+        <img class="circle-img" src="@/assets/images/logo4.png" alt="Logo" />
       </div>
+      <!-- <div class="w-full flex justify-start"> -->
+        <span class="navtext">HelpinHand</span>  
+      <!-- </div> -->
+          
       <div class="button-container flex justify-end px-2">
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('home')">Home</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">About</button>
@@ -40,11 +43,12 @@
                   <img class="custom-img" src="@/assets/images/help_stairs.jpg" alt="Help Stairs" />
               </div>
 
-              <div class="bg-white md:w-1/2 h-96 p-5 ">
+              <div class="bg-white md:w-1/2 h-96 p-5 flex items-center justify-center flex-col">
                 <span class="main-header sm:text-xl md:text-xl lg:text-2xl" style="font-family: 'Montserrat', sans-serif; color: #558cd3;">
                   HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support. Through our user-friendly platform, we inspire acts of kindness, bridge the gap between people, and create a world where helping others is a fundamental part of everyday life. Join the HelpinHand community and be a part of this powerful movement of compassion.
                 </span>
               </div>
+
             </div>
 
 
@@ -58,6 +62,9 @@
                 <mobile-image-carousel></mobile-image-carousel>
               </div>
 
+              <div class="w-full h-24 bg-sky-200">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat noLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumn proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+              </div>
 
             </div>
           </div>
@@ -226,6 +233,7 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 html,
 body {
   margin: 0;
@@ -369,4 +377,27 @@ body {
 }
 }
 
+
+.circle-div {
+  
+  font-family: 'Montserrat', sans-serif;
+  color: #558ad3;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle-img {
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+}
+
+.navtext{
+  margin-right:25%;
+  width:25%;
+  font-family: 'Kaushan Script', cursive;
+  /* color: #558cd3; */
+  color: #2b7097;
+  font-size: 5rem;
+}
 </style>
