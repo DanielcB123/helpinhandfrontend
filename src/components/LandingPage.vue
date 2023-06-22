@@ -48,7 +48,7 @@
       <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('about')">About</button>
       <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('about')">How It Works?</button>
       <button class="block w-full px-4 py-2 text-sm text-left">Sign Up</button>
-      <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();openLoginModal">Login</button>
+      <button class="block w-full px-4 py-2 text-sm text-left" @click="openLoginModal();toggleNav();">Login</button>
     </div>
 
 
@@ -131,7 +131,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
     <transition name="slide">
       <div v-if="showLoginModal" class="fixed inset-0 flex items-center justify-center z-10">
-        <div class="bg-white w-1/2 h-1/2 rounded p-4">
+        <div class="bg-white w-5/6 sm:w-1/3 h-1/2 rounded p-4">
           <LoginView @close="closeLoginModal" />
         </div>
       </div>

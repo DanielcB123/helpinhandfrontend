@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="bg-blue-500">
     <h2 class="">Loginsss</h2>
     <form @submit.prevent="login">
       <input type="text" v-model="username" placeholder="Username" required>
