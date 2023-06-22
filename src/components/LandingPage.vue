@@ -6,24 +6,57 @@
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     </head>
 
-    <div class="w-full bg-animation h-32 flex justify-between items-center border-b-2 border-blue-200">
+    <!-- DESKTOP NAV -->
+    <div class="hidden w-full bg-animation h-32 sm:flex justify-between items-center border-b-2 border-blue-200">
       <div class="circle-div w-auto ml-2 hidden md:flex md:text-sm bg-sky-100">
         <img class="circle-img" src="@/assets/images/logo4.png" alt="Logo" />
       </div>
       <!-- <div class="w-full flex justify-start"> -->
         <span class="navtext">HelpinHand</span>  
       <!-- </div> -->
-          
       <div class="button-container flex justify-end px-2">
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('home')">Home</button>
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">About</button>
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded" @click="changeSection('about')">How It Works?</button>
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white px-4 py-3 rounded">Sign Up</button>
-        <button class="mr-4 bg-blue-500 border border-white hover:bg-blue-600 text-white px-4 py-3 rounded" @click="openLoginModal">Login</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="changeSection('home')">Home</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="changeSection('about')">About</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="changeSection('about')">How It Works?</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded">Sign Up</button>
+        <button class="mr-4 bg-red-500 bg-blue-500 border border-white hover:bg-blue-600 text-white sm:px-4 px-2 py-3 rounded" @click="openLoginModal">Login</button>
       </div>
-
       <!-- Other top navigation content -->
     </div>
+
+
+  <!-- MOBILE NAV -->
+  <div class="flex sm:hidden w-full bg-animation h-32 justify-between items-center border-b-2 border-blue-200">
+    <div class="circle-div w-auto ml-2 flex md:flex md:text-sm bg-sky-100">
+      <img class="circle-img" src="@/assets/images/logo4.png" alt="Logo" />
+    </div>
+    <span class="mr-6 flex sm:hidden text-3xl" style="font-family: 'Kaushan Script', cursive;color: #2b7097;">HelpinHand</span>
+
+    <!-- Hamburger Menu -->
+    <div @click="toggleNav" class="mr-12 cursor-pointer px-2 py-1">
+      <div class="hamburger-menu" :class="{'open': navOpen}">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </div>
+
+
+    <!-- Dropdown Menu -->
+    <div v-if="navOpen" :key="menuKey" class="fixed z-100 top-0 mt-32 right-0 w-48 py-2 bg-white rounded-lg shadow-xl">
+      <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('home')">Home</button>
+      <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('about')">About</button>
+      <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('about')">How It Works?</button>
+      <button class="block w-full px-4 py-2 text-sm text-left">Sign Up</button>
+      <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();openLoginModal">Login</button>
+    </div>
+
+
+  </div>
+
+
+
+
 
     <!-- HOME -->
     <transition name="fade"  mode="out-in">
@@ -52,7 +85,7 @@
             </div>
 
 
-            <div class="w-full px-24">
+            <div class="w-full pl-3 pr-10">
               <div class="w-full border-t border-blue-200 mt-8 pb-5"></div>
               <div class="" v-if="isSmallScreen">
                 <image-carousel></image-carousel>
@@ -130,6 +163,8 @@ export default {
       visibleSection: 'home',
       windowWidth: 0,
       currentSlideIndex: 0,
+      navOpen: false,
+      menuKey: 0,
       slides: [
         { src: './assets/images/logo2.png', alt: 'Image 1' },
       ],
@@ -167,6 +202,11 @@ export default {
   },
 
   methods: {
+    toggleNav() {
+      console.log(this.navOpen);
+      this.navOpen = !this.navOpen;
+      this.menuKey++; // Increment key here
+    },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth;
       // this.isLargeScreen = this.windowWidth > 786;
@@ -379,12 +419,13 @@ body {
 
 
 .circle-div {
-  
   font-family: 'Montserrat', sans-serif;
   color: #558ad3;
+  border: 3px solid #558ad3; /* adjust border thickness as desired */
   border-radius: 50%;
   overflow: hidden;
 }
+
 
 .circle-img {
   width: 7rem;
@@ -400,4 +441,72 @@ body {
   color: #2b7097;
   font-size: 5rem;
 }
+
+@media (max-width: 1200px) {
+  .navtext{
+    margin-right:15%;
+    width:25%;
+    font-family: 'Kaushan Script', cursive;
+    /* color: #558cd3; */
+    color: #2b7097;
+    font-size: 3rem;
+  }
+}
+@media (max-width: 1000px) {
+  .navtext{
+    margin-right:10%;
+    width:25%;
+    font-family: 'Kaushan Script', cursive;
+    /* color: #558cd3; */
+    color: #2b7097;
+    font-size: 3rem;
+  }
+}
+@media (max-width: 900px) {
+  .navtext{
+    margin-right:-10%;
+    width:25%;
+    font-family: 'Kaushan Script', cursive;
+    /* color: #558cd3; */
+    color: #2b7097;
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .navtext{
+    visibility: hidden;
+  }
+}
+
+
+/* MOBILE NAV HAMBURGER */
+.hamburger-menu {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+
+.hamburger-menu .line {
+  width: 2rem;
+  height: 0.25rem;
+  background-color: #ffffff;
+  transition: all 0.3s linear;
+}
+
+.hamburger-menu.open .line:nth-child(1) {
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.hamburger-menu.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open .line:nth-child(3) {
+  transform: rotate(45deg) translate(-9px, -6px);
+}
+
 </style>
