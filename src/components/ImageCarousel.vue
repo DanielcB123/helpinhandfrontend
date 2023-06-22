@@ -6,7 +6,12 @@
       class="carousel-slide"
       :style="{ left: `${100 * (index - currentSlideIndex)}%` }"
     >
-      <img :src="slide.src" :alt="slide.alt" />
+    <img 
+      :src="slide.src" 
+      :alt="slide.alt" 
+      @click="imageClicked(index + 1)"
+    />
+
     </div>
 
     <button class="carousel-button prev-button" @click="prevSlide">&lt;prev</button>
@@ -30,6 +35,12 @@ export default {
     };
   },
   methods: {
+    imageClicked(imageNumber) {
+      // console.log(imageNumber);
+      this.$emit('image-clicked', imageNumber);
+      // if you want to log it in this component:
+      // console.log(`Image ${imageNumber} clicked`);
+    },
     nextSlide() {
       this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
     },
