@@ -58,6 +58,19 @@
 
 
 
+
+
+
+    <div v-if="visibleSection === 'image1'">
+      <image-one></image-one>
+    </div>
+
+
+
+
+
+
+
     <!-- HOME -->
     <transition name="fade"  mode="out-in">
       <div v-if="visibleSection === 'home'"  class="flex w-screen flex-grow bg-white">
@@ -88,11 +101,11 @@
             <div class="w-full pl-3 pr-10">
               <div class="w-full border-t border-blue-200 mt-8 pb-5"></div>
               <div class="" v-if="isSmallScreen">
-                <image-carousel></image-carousel>
+                <image-carousel ></image-carousel>
               </div>
 
               <div class="" v-else>
-                <mobile-image-carousel></mobile-image-carousel>
+                <mobile-image-carousel  @image-clicked="handleImageClick"></mobile-image-carousel>
               </div>
 
               <div class="w-full h-24 bg-sky-200">
@@ -117,6 +130,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </transition>
 
+
+    
 
 <!-- Bottom mobile nav -->
     <div class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300 z-10" :class="{ 'hidden': hideBottomNav }">
@@ -148,6 +163,7 @@ import LoginView from '@/components/LoginView.vue';
 import logo from '@/assets/images/logo2.png';
 import ImageCarousel from './ImageCarousel.vue';  // adjust the path based on your project structure
 import MobileImageCarousel from './MobileImageCarousel.vue'; 
+import ImageOne from './ImageOne.vue'; 
 
 // import logo from '@/assets/images/logo2.png';
 // import logo from '@/assets/images/help_stairs.jpg';
@@ -202,6 +218,13 @@ export default {
   },
 
   methods: {
+    handleImageClick(imageNumber) {
+      console.log(`Image ${imageNumber} component`);
+      this.visibleSection = `image${imageNumber}`;
+
+
+      // Handle the click event
+    },
     toggleNav() {
       console.log(this.navOpen);
       this.navOpen = !this.navOpen;
@@ -248,7 +271,7 @@ export default {
 
       // Then, use $nextTick to wait until the DOM update (and thus the fade out) is complete
       this.$nextTick(() => {
-        // Use a JavaScript timeout to add a slight delay
+        // Use a JavaScript timeoMobileImageCarouselut to add a slight delay
         setTimeout(() => {
           // After the delay, set the new section to make it start fading in
           this.visibleSection = newSection;
@@ -267,7 +290,8 @@ export default {
   components: {
     LoginView,
     ImageCarousel,
-    MobileImageCarousel
+    MobileImageCarousel,
+    ImageOne,
   },
 };
 </script>

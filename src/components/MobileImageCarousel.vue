@@ -6,13 +6,22 @@
       class="carousel-slide"
       :style="{ left: `${100 * (index - currentGroupIndex)}%` }"
     >
-      <img v-for="(slide, index) in group" :key="index" :src="slide.src" :alt="slide.alt" />
+<img 
+  v-for="(slide, index) in group" 
+  :key="index" 
+  :src="slide.src" 
+  :alt="slide.alt" 
+  @click="imageClicked(index + 1 + currentGroupIndex * group.length);
+  testClick()"
+/>
+
     </div>
 
     <button class="carousel-button prev-button" @click="prevSlide">&lt;prev</button>
     <button class="carousel-button next-button" @click="nextSlide">&gt;next</button>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -35,6 +44,15 @@ export default {
     };
   },
   methods: {
+    testClick() {
+      // console.log('test');
+    },
+
+    imageClicked(imageNumber) {
+      console.log(`Image ${imageNumber} clicked`);
+      this.$emit('image-clicked', imageNumber);
+      // this.$emit('open');
+    },
     nextSlide() {
       this.currentGroupIndex = (this.currentGroupIndex + 1) % this.slideGroups.length;
     },
@@ -42,6 +60,9 @@ export default {
       this.currentGroupIndex =
         (this.currentGroupIndex - 1 + this.slideGroups.length) % this.slideGroups.length;
     },
+    // imageClicked(imageNumber) {
+    //   console.log(`Image ${imageNumber} clicked`);
+    // },
   },
 };
 </script>
