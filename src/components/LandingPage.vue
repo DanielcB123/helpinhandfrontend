@@ -1,3 +1,4 @@
+
 <template>
 <div class="w-screen h-auto no-scrollbar" @scroll="handleScroll">
 
@@ -108,9 +109,53 @@
                 <mobile-image-carousel  @image-clicked="handleImageClick"></mobile-image-carousel>
               </div>
 
-              <div class="w-full h-24 bg-sky-200 mt-5 ml-2 sm:ml-0">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat noLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumn proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-              </div>
+
+
+
+<div class="mt-6 w-full h-28 custom-sky flex justify-center  items-center">
+  <h6 class="text-8xl text-white" style="font-family: 'Kaushan Script', cursive;">Connect</h6>
+</div>
+<!-- <div class="mt-6 w-full h-24 bg-sky-100 flex justify-center items-center">
+  <h6 class="w-full">Connect</h6>
+</div> -->
+
+
+  <div class="half-screen" ref="container">
+
+
+    <div class="bg-white bg-opacity-70 w-1/4 h-3/4 m-12 p-3 rounded absolute">
+      <h1>here</h1>
+    </div>
+
+
+    <svg :width="width" :height="height">
+      <path
+        v-for="arc in arcs"
+        :key="arc.id"
+        :d="arc.d"
+        stroke="white"
+        fill="none"
+        stroke-width="0.5"
+        class="arc-path"
+        :class="{ 'arc-animation': arc.active }"
+      />
+    </svg>
+    
+    <div
+      v-for="point in points"
+      :key="point.id"
+      :style="{
+        top: `${point.y}px`,
+        left: `${point.x}px`,
+      }"
+      class="point"
+    />
+  </div>
+
+
+
+
+
 
             </div>
           </div>
@@ -164,12 +209,18 @@ import logo from '@/assets/images/logo2.png';
 import ImageCarousel from './ImageCarousel.vue';  // adjust the path based on your project structure
 import MobileImageCarousel from './MobileImageCarousel.vue'; 
 import ImageOne from './ImageOne.vue'; 
-
+import { uniqBy, random } from 'lodash';
 // import logo from '@/assets/images/logo2.png';
 // import logo from '@/assets/images/help_stairs.jpg';
 export default {
   data() {
     return {
+      width: 0,
+      height: 0,
+      points: [],
+      arcs: [],
+
+
       isLargeScreen: true,
       hideBottomNav: false,
       scrollTimer: null,
@@ -211,6 +262,17 @@ export default {
     window.addEventListener('resize', this.handleScreenResize);
     this.handleScreenResize();
     window.addEventListener('scroll', this.handleScroll);
+
+
+    this.width = this.$refs.container.offsetWidth;
+    this.height = this.$refs.container.offsetHeight;
+    this.generatePoints();
+    this.createArcs();
+    this.animateRandomArcs();
+    setInterval(() => {
+      this.animateRandomArcs();
+    }, 10000);
+
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.handleScreenResize);
@@ -218,6 +280,52 @@ export default {
   },
 
   methods: {
+
+    generatePoints() {
+      for (let i = 0; i < 30; i++) {
+        this.points.push({
+          id: i,
+          x: random(0, this.width),
+          y: random(0, this.height),
+        });
+      }
+    },
+    createArcs() {
+      for (let i = 0; i < this.points.length; i++) {
+        for (let j = i + 1; j < this.points.length; j++) {
+          const start = this.points[i];
+          const end = this.points[j];
+          const dx = end.x - start.x;
+          const dy = end.y - start.y;
+          const dr = Math.sqrt(dx * dx + dy * dy);
+          const d = `M${start.x},${start.y}A${dr},${dr} 0 0,1 ${end.x},${end.y}`;
+
+          this.arcs = uniqBy(
+            [
+              ...this.arcs,
+              {
+                id: `${start.id}-${end.id}`,
+                d,
+                active: false,
+              },
+            ],
+            'id'
+          );
+        }
+      }
+    },
+    animateRandomArcs() {
+      this.arcs = this.arcs.map(arc => ({
+        ...arc,
+        active: Math.random() < 0.2,
+      }));
+    },
+
+
+
+
+
+
     handleImageClick(imageNumber) {
       console.log(`Image ${imageNumber} component`);
       this.visibleSection = `image${imageNumber}`;
@@ -533,4 +641,42 @@ body {
   transform: rotate(45deg) translate(-9px, -6px);
 }
 
+
+
+.custom-sky{
+  background: #9ac3fa;
+}
+
+.half-screen {
+  margin-top:2rem;
+  width: 100%;
+  height: 50vh;
+  background: #9ac3fa;
+  position: relative;
+}
+
+.point {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.arc-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.arc-animation {
+  animation: dash 10s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 </style>
+
+
