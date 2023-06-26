@@ -74,7 +74,7 @@
 
     <!-- HOME -->
     <transition name="fade"  mode="out-in">
-      <div v-if="visibleSection === 'home'"  class="flex w-screen flex-grow bg-white">
+      <div v-if="visibleSection === 'home'"  class="w-screen bg-white">
         <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
         <div class="w-screen h-auto" @scroll="handleScroll">
           <div class="w-full h-auto flex flex-wrap justify-around bg-white">
@@ -122,10 +122,26 @@
 
   <div class="half-screen" ref="container">
 
+<h1 class="absolute w-full flex justify-center text-2xl text-white">Testimonials</h1>
+<div class="ml-0 w-full h-auto m-12 p-3 rounded absolute flex justify-around">
 
-    <div class="bg-white bg-opacity-70 w-1/4 h-3/4 m-12 p-3 rounded absolute">
-      <h1>here</h1>
-    </div>
+<div class="w-1/4 p-5 rounded-md bg-white bg-opacity-50 z-100">
+    <h1 style="color: #333; font-size: 24px; text-align: center;">"A Life-Altering Experience"</h1>
+    <p style="font-size: 16px; color: #666; line-height: 1.5; text-align: justify;">
+      "Joining the HelpinHand community has been a life-altering experience. Not only have I had the privilege to help those in need, but I've also made connections with some of the kindest, most compassionate individuals. This platform truly embodies the spirit of community and altruism."    </p>
+</div>
+<div class="w-1/4 p-5 rounded-md bg-white bg-opacity-50 z-100">
+    <h1 style="color: #333; font-size: 24px; text-align: center;">"A Ripple Effect of Kindness"</h1>
+    <p style="font-size: 16px; color: #666; line-height: 1.5; text-align: justify;">
+      "HelpinHand has offered me an incredible platform to lend a helping hand to those in need. It's beautifully user-friendly and makes volunteering so accessible. I feel part of a larger movement, a ripple effect of kindness and compassion that starts right here!"    </p>
+</div>
+<div class="w-1/4 p-5 rounded-md bg-white bg-opacity-50 z-100">
+    <h1 style="color: #333; font-size: 24px; text-align: center;">"Fostering the Spirit of Service"</h1>
+    <p style="font-size: 16px; color: #666; line-height: 1.5; text-align: justify;">
+      "Being a part of HelpinHand's community has added immense value to my life. The feeling of making a positive impact on someone's life is simply unparalleled. The platform seamlessly bridges the gap between individuals, making it easy to offer help where it's needed most. A big thumbs up to HelpinHand for fostering this spirit of service!"    </p>
+</div>
+</div>
+
 
 
     <svg :width="width" :height="height">
@@ -160,23 +176,109 @@
             </div>
           </div>
         </div>
+
+<div class="mt-16 w-auto h-64 flex justify-center items-center ml-3 mr-8 mt-12">
+  <h6 class="text-8xl text-white" style="font-family: 'Kaushan Script', cursive;">
+
+
+<!-- Need to make footer a component to import -->
+    <footer class="footer bg-footer text-white">
+        <div class="footer-section">
+            <h2 class="footer-title">About HelpinHand</h2>
+            <p>HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support.</p>
+        </div>
+        <div class="footer-section">
+            <h2 class="footer-title">Quick Links</h2>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-section">
+            <h2 class="footer-title">Legal</h2>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="footer-section">
+            <h2 class="footer-title">Contact Us</h2>
+            <p>123 HelpinHand St.</p>
+            <p>City, ST 12345</p>
+            <p>contact@helpinhand.com</p>
+        </div>
+    </footer>
+
+  </h6>
+</div>
+
       </div>
     </transition>
+
+
+
+
+
 
     <!-- ABOUT -->
-    <transition name="fade"  mode="out-in">
-      <div v-if="visibleSection === 'about'" class="flex w-screen flex-grow bg-white">
+<transition name="fade"  mode="out-in">
+    <div v-if="visibleSection === 'about'" class="w-screen bg-white">
         <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
-        <div class="w-screen h-auto" @scroll="handleScroll">
-          <div class="w-full h-auto flex flex-wrap justify-around bg-white">
-            About
-          </div>
+        <div class="w-screen h-[50vh]" @scroll="handleScroll">
+            <div class="w-full h-auto flex flex-wrap justify-around bg-white px-8 py-16">
+                <div class="w-full md:w-1/2">
+                    <img src="path_to_daniel_burgess_image" alt="Daniel Burgess" class="w-full h-auto rounded-full mb-8">
+                </div>
+                <div class="w-full md:w-1/2 md:pl-8">
+                    <h2 class="font-semibold text-xl mb-4">About Us</h2>
+                    <p class="text-gray-600 mb-4">
+                        [Your company name] was founded by Daniel Burgess with a mission to [insert mission statement here]. 
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        We believe in [insert core belief here]. Our dedication to [insert another value or vision here] sets us apart in the industry. 
+                    </p>
+                    <p class="text-gray-600">
+                        With a relentless focus on [insert main area of focus here], we are committed to making a positive impact in [insert impact area here].
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
-    </transition>
+<div class="mt-6 w-auto h-64 bg-animation flex justify-center items-center ml-3 mr-8 mt-12">
+  <h6 class="text-8xl text-white" style="font-family: 'Kaushan Script', cursive;">
 
 
-    
+<!-- Need to make footer a component to import -->
+    <footer class="footer bg-animation">
+        <div class="footer-section">
+            <h2 class="footer-title">About HelpinHand</h2>
+            <p>HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support.</p>
+        </div>
+        <div class="footer-section">
+            <h2 class="footer-title">Quick Links</h2>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-section">
+            <h2 class="footer-title">Legal</h2>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="footer-section">
+            <h2 class="footer-title">Contact Us</h2>
+            <p>123 HelpinHand St.</p>
+            <p>City, ST 12345</p>
+            <p>contact@helpinhand.com</p>
+        </div>
+    </footer>
+
+  </h6>
+</div>
+    </div>
+</transition>
+
+
+
+
 
 <!-- Bottom mobile nav -->
     <div class="h-32 fixed bottom-0 w-screen flex justify-between items-center bg-sky-300 z-10" :class="{ 'hidden': hideBottomNav }">
@@ -677,6 +779,37 @@ body {
     stroke-dashoffset: 0;
   }
 }
+.footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.footer-section {
+    margin: 20px;
+    font-size: 16px;
+}
+.footer-title {
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+.footer-section a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+.footer-section a:hover {
+    text-decoration: underline;
+}
+.bg-footer {
+    background-color: #3f6088;
+}
+
 </style>
 
 
