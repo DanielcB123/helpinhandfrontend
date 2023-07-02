@@ -19,7 +19,7 @@
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="changeSection('home')">Home</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="changeSection('about')">About</button>
         <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="changeSection('about')">How It Works?</button>
-        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded">Sign Up</button>
+        <button class="mr-4 bg-sky border-b border-l border-r border-#71a0dd text-white sm:px-4 px-2 py-3 rounded" @click="openRegisterModal">Sign Up</button>
         <button class="mr-4 bg-red-500 bg-blue-500 border border-white hover:bg-blue-600 text-white sm:px-4 px-2 py-3 rounded" @click="openLoginModal">Login</button>
       </div>
       <!-- Other top navigation content -->
@@ -48,7 +48,7 @@
       <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('home')">Home</button>
       <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('about')">About</button>
       <button class="block w-full px-4 py-2 text-sm text-left" @click="toggleNav();changeSection('about')">How It Works?</button>
-      <button class="block w-full px-4 py-2 text-sm text-left">Sign Up</button>
+      <button class="block w-full px-4 py-2 text-sm text-left" @click="openRegisterModal()">Sign Up</button>
       <button class="block w-full px-4 py-2 text-sm text-left" @click="openLoginModal();toggleNav();">Login</button>
     </div>
 
@@ -123,19 +123,19 @@
   <div class="half-screen" ref="container">
 
 <h1 class="absolute w-full flex justify-center text-2xl text-white">Testimonials</h1>
-<div class="ml-0 w-full h-auto m-12 p-3 rounded absolute flex justify-around">
+<div class="ml-0 w-full h-auto m-12 p-3 rounded absolute md:flex md:justify-around">
 
-<div class="w-1/4 p-5 rounded-md bg-white bg-opacity-50 z-100">
+<div class="w-full md:w-1/4 p-5 my-2 rounded-md bg-white bg-opacity-50 z-100">
     <h1 style="color: #333; font-size: 24px; text-align: center;">"A Life-Altering Experience"</h1>
     <p style="font-size: 16px; color: #666; line-height: 1.5; text-align: justify;">
       "Joining the HelpinHand community has been a life-altering experience. Not only have I had the privilege to help those in need, but I've also made connections with some of the kindest, most compassionate individuals. This platform truly embodies the spirit of community and altruism."    </p>
 </div>
-<div class="w-1/4 p-5 rounded-md bg-white bg-opacity-50 z-100">
+<div class="w-full md:w-1/4 p-5 my-2 rounded-md bg-white bg-opacity-50 z-100">
     <h1 style="color: #333; font-size: 24px; text-align: center;">"A Ripple Effect of Kindness"</h1>
     <p style="font-size: 16px; color: #666; line-height: 1.5; text-align: justify;">
       "HelpinHand has offered me an incredible platform to lend a helping hand to those in need. It's beautifully user-friendly and makes volunteering so accessible. I feel part of a larger movement, a ripple effect of kindness and compassion that starts right here!"    </p>
 </div>
-<div class="w-1/4 p-5 rounded-md bg-white bg-opacity-50 z-100">
+<div class="w-full md:w-1/4 p-5 my-2 rounded-md bg-white bg-opacity-50 z-100">
     <h1 style="color: #333; font-size: 24px; text-align: center;">"Fostering the Spirit of Service"</h1>
     <p style="font-size: 16px; color: #666; line-height: 1.5; text-align: justify;">
       "Being a part of HelpinHand's community has added immense value to my life. The feeling of making a positive impact on someone's life is simply unparalleled. The platform seamlessly bridges the gap between individuals, making it easy to offer help where it's needed most. A big thumbs up to HelpinHand for fostering this spirit of service!"    </p>
@@ -224,21 +224,27 @@
         <div v-if="!isLargeScreen && 0" class="w-36 h-screen bg-cyan-100">side nav</div>
         <div class="w-screen h-[50vh]" @scroll="handleScroll">
             <div class="w-full h-auto flex flex-wrap justify-around bg-white px-8 py-16">
-                <div class="w-full md:w-1/2">
-                    <img src="path_to_daniel_burgess_image" alt="Daniel Burgess" class="w-full h-auto rounded-full mb-8">
+                <div class="w-full md:w-1/4">
+                    <img  src="@/assets/images/danpic.jpg" alt="Daniel Burgess" class="w-full h-auto rounded-full mb-8">
                 </div>
+
                 <div class="w-full md:w-1/2 md:pl-8">
-                    <h2 class="font-semibold text-xl mb-4">About Us</h2>
-                    <p class="text-gray-600 mb-4">
-                        [Your company name] was founded by Daniel Burgess with a mission to [insert mission statement here]. 
+                    <h2 class="font-semibold text-3xl mb-4 text-sky-700">About Us</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        <span class="text-lg font-semibold">HelpinHand</span>, established by Daniel Burgess, aims to build bridges between empathetic volunteers and those who require assistance, cultivating an environment of mutual aid and community engagement.
                     </p>
-                    <p class="text-gray-600 mb-4">
-                        We believe in [insert core belief here]. Our dedication to [insert another value or vision here] sets us apart in the industry. 
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        We are firm believers in the power of kindness. Our commitment to eliminating barriers among individuals distinguishes us in our field.
                     </p>
-                    <p class="text-gray-600">
-                        With a relentless focus on [insert main area of focus here], we are committed to making a positive impact in [insert impact area here].
+                    <p class="text-gray-600 leading-relaxed">
+                        With an unwavering emphasis on developing an accessible platform, we are devoted to effecting positive change by fostering a society where lending a helping hand is a norm, not an exception.
                     </p>
                 </div>
+
+
+
+
+
             </div>
         </div>
 <div class="mt-6 w-auto h-64 bg-animation flex justify-center items-center ml-3 mr-8 mt-12">
@@ -246,7 +252,7 @@
 
 
 <!-- Need to make footer a component to import -->
-    <footer class="footer bg-animation">
+    <footer class="footer bg-footer text-white">
         <div class="footer-section">
             <h2 class="footer-title">About HelpinHand</h2>
             <p>HelpinHand's mission is to connect individuals in need with compassionate volunteers, fostering a culture of altruism and community support.</p>
@@ -290,7 +296,7 @@
 
 
 
-
+<!-- LOGIN -->
     <transition name="slide">
       <div v-if="showLoginModal" class="fixed inset-0 flex items-center justify-center z-10">
         <div class="bg-white w-5/6 sm:w-1/3 h-1/2 rounded p-4">
@@ -301,12 +307,29 @@
     <transition name="modal-bg-fade">
       <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 modal-bg-fade"></div>
     </transition>
+
+
+
+<!-- REGISTER -->
+    <transition name="slide">
+      <div v-if="showRegisterModal" class="fixed inset-0 flex items-center justify-center z-10">
+        <div class="bg-white w-5/6 sm:w-1/3 h-1/2 rounded p-4">
+          <RegisterView @close="closeRegisterModal" />
+        </div>
+      </div>
+    </transition>
+    <transition name="modal-bg-fade">
+      <div v-if="showRegisterModal" class="fixed inset-0 bg-black bg-opacity-50 modal-bg-fade"></div>
+    </transition>
+
+
   </div>
 </div>
 </template>
 
 <script>
 import LoginView from '@/components/LoginView.vue';
+import RegisterView from '@/components/RegisterView.vue';
 import logo from '@/assets/images/logo2.png';
 import ImageCarousel from './ImageCarousel.vue';  // adjust the path based on your project structure
 import MobileImageCarousel from './MobileImageCarousel.vue'; 
@@ -328,6 +351,7 @@ export default {
       scrollTimer: null,
       prevScrollY: 0,
       showLoginModal: false,
+      showRegisterModal: false,
       logo: logo,
       visibleSection: 'home',
       windowWidth: 0,
@@ -472,8 +496,14 @@ export default {
     openLoginModal() {
       this.showLoginModal = true;
     },
+    openRegisterModal() {
+      this.showRegisterModal = true;
+    },
     closeLoginModal() {
       this.showLoginModal = false;
+    },
+    closeRegisterModal() {
+      this.showRegisterModal = false;
     },
     changeSection(newSection) {
       // First, set the current section to null to hide it
@@ -499,6 +529,7 @@ export default {
 
   components: {
     LoginView,
+    RegisterView,
     ImageCarousel,
     MobileImageCarousel,
     ImageOne,
@@ -750,11 +781,23 @@ body {
 }
 
 .half-screen {
-  margin-top:2rem;
+  margin-top: 2rem;
   width: 100%;
   height: 50vh;
   background: #9ac3fa;
   position: relative;
+}
+@media (max-width: 1086px) {
+  .half-screen {
+    height: 80vh;
+    margin-bottom:2rem;
+  }
+}
+@media (max-width: 786px) {
+  .half-screen {
+    height: 80vh;
+    margin-bottom:2rem;
+  }
 }
 
 .point {
@@ -807,7 +850,8 @@ body {
     text-decoration: underline;
 }
 .bg-footer {
-    background-color: #3f6088;
+    /* background-color: #3f6088; */
+    background-color: #577dac;
 }
 
 </style>
