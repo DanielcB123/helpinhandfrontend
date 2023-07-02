@@ -15,6 +15,11 @@
           </div>
 
           <div>
+            <label for="confirmPassword" class="sr-only">Confirm Password</label>
+            <input id="confirmPassword" type="password" v-model="confirmPassword" required class="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Confirm Password">
+          </div>
+
+          <div>
             <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
           </div>
 
@@ -34,11 +39,17 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   },
   methods: {
     async register() {
+      if (this.password !== this.confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+
       try {
         const response = await axios.post('http://localhost:8000/api/users/', {
           username: this.username,

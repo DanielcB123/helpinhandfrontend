@@ -15,9 +15,11 @@
       <!-- Main content area with three sections -->
       <div class="w-full flex flex-col bg-green-50" @scroll="handleScroll">
         <!-- Top div -->
-        <div class="w-full bg-yellow-200 p-4">
-          <p>Top content goes here</p>
-        </div>
+  <div class="w-full bg-yellow-200 p-4">
+top
+<div id="map" style="width: 100%; height: 400px;"></div>
+
+  </div>
 
         <!-- Middle div with three divs side by side -->
         <div class="w-full flex flex-wrap justify-between bg-red-200 p-4">
@@ -61,7 +63,7 @@
 
 
 <script>
-
+/* global google */
 // export default {
 //   methods: {
 //     logout() {
@@ -71,7 +73,9 @@
 //   }
 // }
 // import * as THREE from 'three';
+
 import LoginView from '@/components/LoginView.vue';
+
 
 export default {
   data() {
@@ -80,10 +84,15 @@ export default {
       hideBottomNav: false,
       scrollTimer: null,
       prevScrollY: 0,
-      showLoginModal: false
+      showLoginModal: false,
+      map: null,
     };
   },
   mounted() {
+  this.$nextTick(() => {
+    window.initMap = this.initMap;
+    this.initMap();
+  });
     window.addEventListener('resize', this.handleScreenResize);
     this.handleScreenResize();
     window.addEventListener('scroll', this.handleScroll);
@@ -93,6 +102,12 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+  initMap() {
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  },
     logout() {
       localStorage.removeItem('token');
       this.$router.push('/'); // redirect to the login page
@@ -127,7 +142,8 @@ export default {
     }
   },
   components: {
-    LoginView
+    LoginView,
+
   }
 };
 </script>
