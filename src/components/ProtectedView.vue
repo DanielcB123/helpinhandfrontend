@@ -34,22 +34,23 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in data" :key="index">
-                        <td>{{ item.service }}</td>
-                        <td>{{ item.date }}</td>
-                        <td>{{ item.location }}</td>
-                        <td>{{ item.volunteers }}</td>
-                        <td>
+                        <td data-label="Service">{{ item.service }}</td>
+                        <td data-label="Date">{{ item.date }}</td>
+                        <td data-label="Location">{{ item.location }}</td>
+                        <td data-label="Volunteers">{{ item.volunteers }}</td>
+                        <td data-label="View">
                             <button @click="openViewModal(index)" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
                                 View
                             </button>
                         </td>
-                        <td>
+                        <td data-label="Sign-up">
                             <button @click="openSignupModal(index)" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700">
                                 Sign-up
                             </button>
                         </td>
                     </tr>
                 </tbody>
+
 
               </table>
             </div>
@@ -242,18 +243,18 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     width: 100%;
     background-color: #f0fdf4;
+    overflow-x: auto;
 }
 .styled-table thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: left;
-    
 }
 .styled-table th,
 .styled-table td {
-    padding: 12px 24px;
-    border-left: .01rem solid #009879;
-    border-right: .01rem solid #009879;
+    padding: 12px 15px;
+    border-left: 1px solid #009879;
+    border-right: 1px solid #009879;
 }
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
@@ -272,10 +273,59 @@ body {
     color: #009879;
 }
 
-.styled-table thead tr:hover {
-    color: #052e16;
+.styled-table tbody tr:hover {
+    color: #009879;
     transform: scale(1.02);
     transition: all 0.3s ease;
 }
+
+@media screen and (max-width: 600px) {
+    .styled-table {
+        display: block;
+    }
+    .styled-table thead {
+        display: block;
+    }
+    .styled-table tbody {
+        display: block;
+    }
+    .styled-table thead tr {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .styled-table tr {
+        display: block;
+        margin-bottom: 0rem;
+        
+    }
+    .styled-table td {
+        display: block;
+        font-size: .8em;
+        line-height: 1.5em;
+        text-align: right;
+    }
+
+    .styled-table tbody tr:hover {
+      color: #009879;
+      transform: scale(1.00);
+      transition: all 0.3s ease;
+    }
+    .styled-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        border-left: .01rem solid #009879;
+        border-right: .01rem solid #009879;
+    }
+}
+
 
 </style>
