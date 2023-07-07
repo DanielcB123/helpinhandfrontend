@@ -1,7 +1,16 @@
 <template>
-  <div class="bg-black flex flex-col min-h-screen">
-    <div class="w-full bg-sky-300 h-20 flex justify-between items-center">
-      <div></div>
+  <div class="side-nav-bg-overflow flex flex-col min-h-screen">
+    <!-- Top Navigation Bar -->
+    <div class="w-full nav h-24 flex justify-between items-center">
+      <div class="w-full flex justify-end mr-24 flex space-x-4">
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Home</a>
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">News</a>
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Community</a>
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Partnerships</a>
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Volunteer</a>
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Messages</a>
+        <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Notifications</a>
+      </div>
       <div class="mr-12">
         <button @click="logout" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">
           Logout
@@ -9,14 +18,25 @@
       </div>
     </div>
 
+
     <div class="flex w-full flex-grow">
-      <div v-if="isLargeScreen" class="w-36 h-screen bg-cyan-100">side nav</div>
+      <!-- Side Navigation Bar -->
+      <div v-if="isLargeScreen" class="w-48 h-screen side-nav bg-cyan-100 p-4">
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Profile</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Retreats</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Journals</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Challenges</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Settings</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Volunteer History</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Event Calendar</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Support</a>
+      </div>
 
       <!-- Main content area with three sections -->
       <div class="w-full flex flex-col bg-green-50" @scroll="handleScroll">
         <!-- Top div -->
-  <div class="w-full bg-yellow-200 p-4">
-    top
+  <div class="w-full main-bg p-4">
+    <p>top</p>
     <div id="map" style="width: 100%; height: 400px;"></div>
 
           <div class="w-full sm:w-full bg-blue-200 p-5 mt-4">
@@ -44,7 +64,7 @@
 
                         <td data-label="Location">{{ location.place_name }}</td>
 
-                        <td data-label="Date">{{ location.date }}</td> <!-- Updated to use the date field -->
+                        <td data-label="Date">{{ new Date(location.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) }}</td>
                         <td data-label="Meeting Time">{{ location.meeting_time }}</td> <!-- New field -->
                         <td data-label="Volunteers">{{ location.volunteers }}</td> <!-- Updated to use the volunteers field -->
 
@@ -54,8 +74,8 @@
                             </button>
                         </td>
                         <td data-label="Sign-up">
-                            <button @click="openSignupModal(index)" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700">
-                                Sign-up
+                            <button @click="openSignupModal(index)" class="w-fit py-2 px-4 text-xs font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700">
+                                Sign up
                             </button>
                         </td>
                     </tr>
@@ -96,10 +116,14 @@
     </div>
 
     <div
-      class="h-24 bg-green-500 fixed bottom-0 w-screen flex justify-between items-center"
+      class="h-24 bottom-nav fixed bottom-0 w-screen flex justify-between items-center"
       :class="{ 'hidden': hideBottomNav }"
     >
-      <button class="mr-4 bg-blue-500 text-white px-4 py-2 rounded" @click="openLoginModal">Login</button>
+
+        <button @click="logout" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">
+          Logout
+        </button>
+
     </div>
 
     <div v-if="showLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -112,22 +136,23 @@
 
 
 
-  <!-- MODALS -->
-  <div v-if="viewModalIndex !== null" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div class="bg-white w-1/2 h-1/2 rounded p-4">
-          <button @click="closeViewModal">Close</button>
-          <p>Viewing data for {{ data[viewModalIndex].service }}</p>
-          <!-- Add more content to the modal as needed -->
-      </div>
-  </div>
+<!-- MODALS -->
+<div v-if="viewModalIndex !== null && locations[viewModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white w-1/2 h-1/2 rounded p-4">
+        <button @click="closeViewModal">Close</button>
+        <p>Viewing data for {{ locations[viewModalIndex].service }}</p>
+        <!-- Add more content to the modal as needed -->
+    </div>
+</div>
 
-  <div v-if="signupModalIndex !== null" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div class="bg-white w-1/2 h-1/2 rounded p-4">
-          <button @click="closeSignupModal">Close</button>
-          <p>Signing up for {{ data[signupModalIndex].service }}</p>
-          <!-- Add more content to the modal as needed -->
-      </div>
-  </div>
+<div v-if="signupModalIndex !== null && locations[signupModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white w-1/2 h-1/2 rounded p-4">
+        <button @click="closeSignupModal">Close</button>
+        <p>Signing up for {{ locations[signupModalIndex].service }}</p>
+        <!-- Add more content to the modal as needed -->
+    </div>
+</div>
+
 
 </template>
 
@@ -287,15 +312,19 @@ body {
     border-right: 1px solid #009879;
 }
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 2px solid #dddddd;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #E5EFF7;
+}
+
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 4px solid #009879;
 }
 
 .styled-table tbody tr.active-row {
@@ -303,10 +332,19 @@ body {
     color: #009879;
 }
 
-.styled-table tbody tr:hover {
+.styled-table tbody tr:nth-of-type(even):hover {
     color: #009879;
     transform: scale(1.02);
     transition: all 0.3s ease;
+    border-color: white; /* Customize the border color on hover */
+  }
+
+.styled-table tbody tr:nth-of-type(odd):hover {
+    color: #009879;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+    border-color: white; /* Customize the border color on hover */
+
 }
 
 @media screen and (max-width: 600px) {
@@ -356,6 +394,21 @@ body {
         border-right: .01rem solid #009879;
     }
 }
+.main-bg{
+  /* background: #9ac3fa; */
+  background-color: #e6ffff;
+}
 
-
+.nav{
+  background: #2F74AF; 
+}
+.side-nav{
+  background-image: linear-gradient(to top, #5193CD 50%, #2F74AF);
+}
+.bottom-nav{
+  background-color: #5193CD; 
+}
+.side-nav-bg-overflow{
+  background-color: #5193CD; 
+}
 </style>

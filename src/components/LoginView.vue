@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 flex items-center justify-center custom-sky">
+  <div class="p-5 flex items-center justify-center login-modal">
     <div class="bg-white p-10 rounded shadow-3xl w-full">
       <h2 class="text-center text-3xl font-extrabold text-gray-900 mb-7" style="font-family: 'Kaushan Script', cursive;">Login</h2>
       <form @submit.prevent="login">
@@ -76,7 +76,7 @@ async login() {
 </script>
 
 <style scope>
-.custom-sky{
+.login-modal{
   background: #9ac3fa;
 }
 </style>
