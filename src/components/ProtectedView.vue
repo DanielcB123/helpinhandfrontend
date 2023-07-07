@@ -160,6 +160,23 @@ export default {
     window.addEventListener('resize', this.handleScreenResize);
     this.handleScreenResize();
     window.addEventListener('scroll', this.handleScroll);
+
+    // Fetch locations from the API
+    fetch('http://localhost:8000/api/locations/')
+      .then(response => response.json())
+      .then(data => {
+        // Save the locations in your component's data
+        this.locations = data;
+        // Add markers to the map for each location
+        this.locations.forEach(location => {
+          new google.maps.Marker({
+            position: { lat: location.latitude, lng: location.longitude },
+            map: this.map,
+          });
+        });
+      });
+
+
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.handleScreenResize);
@@ -168,7 +185,7 @@ export default {
   methods: {
     initMap() {
       this.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
+        center: {lat: 32.7767, lng: -96.7970},
         zoom: 8
       });
     },

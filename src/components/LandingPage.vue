@@ -313,7 +313,7 @@
 <!-- REGISTER -->
     <transition name="slide">
       <div v-if="showRegisterModal" class="fixed inset-0 flex items-center justify-center z-10">
-        <div class="h-auto bg-white w-5/6 sm:w-1/3 h-1/2 rounded p-4">
+        <div class="h-auto  bg-white w-5/6 sm:w-1/3 h-1/2 rounded p-4">
           <RegisterView @close="closeRegisterModal" />
         </div>
       </div>
