@@ -25,19 +25,29 @@
                 <thead>
                     <tr>
                         <th>Service</th>
-                        <th>Date</th>
+                        <th>Description</th> <!-- New field -->
                         <th>Location</th>
+                        
+                        <th>Date</th>
+                        
+                        
+                        <th>Meeting Time</th> <!-- New field -->
                         <th>Volunteers</th>
                         <th>View</th>
                         <th>Sign-up</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in data" :key="index">
-                        <td data-label="Service">{{ item.service }}</td>
-                        <td data-label="Date">{{ item.date }}</td>
-                        <td data-label="Location">{{ item.location }}</td>
-                        <td data-label="Volunteers">{{ item.volunteers }}</td>
+                    <tr v-for="(location, index) in locations" :key="index">
+                        <td data-label="Service">{{ location.service }}</td>
+                        <td data-label="Service Description">{{ location.service_description }}</td> <!-- New field -->
+
+                        <td data-label="Location">{{ location.place_name }}</td>
+
+                        <td data-label="Date">{{ location.date }}</td> <!-- Updated to use the date field -->
+                        <td data-label="Meeting Time">{{ location.meeting_time }}</td> <!-- New field -->
+                        <td data-label="Volunteers">{{ location.volunteers }}</td> <!-- Updated to use the volunteers field -->
+
                         <td data-label="View">
                             <button @click="openViewModal(index)" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
                                 View
@@ -50,6 +60,8 @@
                         </td>
                     </tr>
                 </tbody>
+
+
 
 
               </table>
@@ -144,6 +156,7 @@ export default {
       prevScrollY: 0,
       showLoginModal: false,
       map: null,
+      locations: [],
       data: [
           { service: 'Service 1', date: 'Date 1', location: 'Location 1', volunteers: 'Volunteers 1' },
           // add more data as needed...
