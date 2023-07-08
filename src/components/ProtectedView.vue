@@ -1,8 +1,7 @@
 <template>
   <div class="side-nav-bg-overflow flex flex-col min-h-screen">
-    <!-- Top Navigation Bar -->
-    <div class="w-full nav h-24 flex justify-between items-center">
-      <div class="w-full flex justify-end mr-24 flex space-x-4">
+    <!-- <div class="w-full nav h-24 flex justify-between items-center">
+      <div class="w-full flex justify-center mr-12 flex space-x-4">
         <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Home</a>
         <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">News</a>
         <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Community</a>
@@ -16,7 +15,39 @@
           Logout
         </button>
       </div>
+    </div> -->
+
+  <div class="w-full nav h-24 flex justify-between items-center">
+    <div class="w-full flex justify-center mr-12 flex space-x-4 desktop-nav">
+      <button @click="isMenuOpen = !isMenuOpen" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">
+        Menu
+      </button>
+      <div v-if="isMenuOpen" class="dropdown-menu">
+        <a href="#" class="dropdown-item">Home</a>
+        <a href="#" class="dropdown-item">News</a>
+        <a href="#" class="dropdown-item">Community</a>
+        <a href="#" class="dropdown-item">Partnerships</a>
+        <a href="#" class="dropdown-item">Volunteer</a>
+        <a href="#" class="dropdown-item">Messages</a>
+        <a href="#" class="dropdown-item">Notifications</a>
+      </div>
     </div>
+    <div class="w-full flex justify-center mr-12 flex space-x-4 mobile-nav">
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Home</a>
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">News</a>
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Community</a>
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Partnerships</a>
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Volunteer</a>
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Messages</a>
+      <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Notifications</a>
+    </div>
+    <div class="mr-12">
+      <button @click="logout" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">
+        Logout
+      </button>
+    </div>
+  </div>
+
 
 
     <div class="flex w-full flex-grow">
@@ -26,9 +57,9 @@
         <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Retreats</a>
         <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Journals</a>
         <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Challenges</a>
-        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Settings</a>
-        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Volunteer History</a>
         <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Event Calendar</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Volunteer History</a>
+        <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Settings</a>
         <a href="#" class=" my-6 block py-2 px-4 font-semibold rounded-lg shadow-md text-black bg-sky-200 hover:bg-sky-500 hover:text-white">Support</a>
       </div>
 
@@ -160,23 +191,45 @@
 </div>
 
 
-<div v-if="signupModalIndex !== null && locations[signupModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-  <div class="bg-white w-3/4 mx-auto rounded-lg p-8">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold"><strong>Confirm</strong> Sign Up</h2>
-      <button @click="closeSignupModal" class="text-gray-500 hover:text-gray-700">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
+  <!-- Confirmation Modal -->
+  <div v-if="confirmationModalIndex !== null && locations[confirmationModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white w-3/4 mx-auto rounded-lg p-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold"><strong>Success!</strong> Service Sign Up</h2>
+        <button @click="closeConfirmationModal" class="text-gray-500 hover:text-gray-700">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <p class="text-lg mb-6">You have successfully signed up for {{ locations[confirmationModalIndex].service }}</p>
+      <p class="text-lg mb-6">Service Description: {{ locations[confirmationModalIndex].service_description }}</p>
+      <p class="text-lg mb-6">Location: {{ locations[confirmationModalIndex].place_name }}</p>
+      <p class="text-lg mb-6">Date: {{ new Date(locations[confirmationModalIndex].date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) }}</p>
+      <p class="text-lg mb-6">Meeting Time: {{ locations[confirmationModalIndex].meeting_time }}</p>
+      <p class="text-lg mb-6">Number of Volunteers: {{ locations[confirmationModalIndex].volunteers }}</p>
+      <!-- Add more details as needed -->
     </div>
-    <p class="text-lg mb-6">Signing up for {{ locations[signupModalIndex].service }}</p>
-    <button @click="signupForLocation(signupModalIndex)" class="w-full py-3 px-6 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700">
-      Sign Up
-    </button>
-    <!-- Add more content to the modal as needed -->
   </div>
-</div>
+
+  <!-- Your existing sign up modal -->
+  <div v-if="signupModalIndex !== null && locations[signupModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white w-3/4 mx-auto rounded-lg p-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold"><strong>Confirm</strong> Sign Up</h2>
+        <button @click="closeSignupModal" class="text-gray-500 hover:text-gray-700">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <p class="text-lg mb-6">Signing up for {{ locations[signupModalIndex].service }}</p>
+      <button @click="signupForLocation(signupModalIndex)" class="w-full py-3 px-6 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700">
+        Sign Up
+      </button>
+      <!-- Add more content to the modal as needed -->
+    </div>
+  </div>
 
 
 
@@ -207,6 +260,7 @@ export default {
       scrollTimer: null,
       prevScrollY: 0,
       showLoginModal: false,
+      confirmationModalIndex: null,
       map: null,
       locations: [],
       data: [
@@ -215,6 +269,7 @@ export default {
       ],
       viewModalIndex: null,
       signupModalIndex: null,
+      isMenuOpen: false,
     };
   },
   mounted() {
@@ -314,6 +369,14 @@ export default {
     closeSignupModal() {
         this.signupModalIndex = null;
     },
+    confirmService(index) {
+      this.confirmationModalIndex = index;
+      this.closeSignupModal();
+    },
+    closeConfirmationModal() {
+      this.confirmationModalIndex = null;
+    },
+
 signupForLocation(index) {
     const location = this.locations[index];
     console.log(location);
@@ -332,13 +395,17 @@ signupForLocation(index) {
         if (data.status === 'success') {
             const updatedLocation = data.location;
             this.locations.splice(index, 1, updatedLocation);
+            // close the signup modal
+            this.closeSignupModal();
+            // open the confirmation modal
+            this.confirmService(index);
         } else {
             console.error('Error:', data.error);
         }
-        this.closeSignupModal();
     })
     .catch(error => console.error('Error:', error));
 },
+
 
   },
   components: {
@@ -358,7 +425,38 @@ body {
 .hidden {
   display: none;
 }
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+}
 
+.dropdown-item {
+  padding: 1rem;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+  .dropdown-menu {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .desktop-nav {
+    display: flex;
+  }
+  .mobile-nav {
+    display: none;
+  }
+}
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -480,4 +578,7 @@ body {
 .side-nav-bg-overflow{
   background-color: #5193CD; 
 }
+
+
+
 </style>
