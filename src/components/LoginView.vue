@@ -77,6 +77,6 @@ async login() {
 
 <style scope>
 .login-modal{
-  background: #9ac3fa;
+  background: #2F74AF;
 }
 </style>

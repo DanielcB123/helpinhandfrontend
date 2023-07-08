@@ -136,22 +136,49 @@
 
 
 
-<!-- MODALS -->
-<div v-if="viewModalIndex !== null && locations[viewModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white w-1/2 h-1/2 rounded p-4">
-        <button @click="closeViewModal">Close</button>
-        <p>Viewing data for {{ locations[viewModalIndex].service }}</p>
-        <!-- Add more content to the modal as needed -->
+<div v-if="viewModalIndex !== null && locations[viewModalIndex]" class="fixed inset-0 flex items-center justify-center">
+  <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+  <div class="absolute w-1/2 mx-auto my-auto bg-white rounded-lg shadow-lg">
+    <div class="p-4">
+      <div class="flex justify-between">
+        <h2 class="text-xl font-semibold">Location Details</h2>
+        <button @click="closeViewModal" class="text-gray-600 hover:text-gray-800">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <hr class="my-4">
+      <p><span class="font-semibold">Service:</span> {{ locations[viewModalIndex].service }}</p>
+      <p><span class="font-semibold">Description:</span> {{ locations[viewModalIndex].service_description }}</p>
+      <p><span class="font-semibold">Location:</span> {{ locations[viewModalIndex].place_name }}</p>
+      <p><span class="font-semibold">Date:</span> {{ new Date(locations[viewModalIndex].date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) }}</p>
+      <p><span class="font-semibold">Meeting Time:</span> {{ locations[viewModalIndex].meeting_time }}</p>
+      <p><span class="font-semibold">Volunteers:</span> {{ locations[viewModalIndex].volunteers }}</p>
     </div>
+  </div>
 </div>
 
+
 <div v-if="signupModalIndex !== null && locations[signupModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white w-1/2 h-1/2 rounded p-4">
-        <button @click="closeSignupModal">Close</button>
-        <p>Signing up for {{ locations[signupModalIndex].service }}</p>
-        <!-- Add more content to the modal as needed -->
+  <div class="bg-white w-3/4 mx-auto rounded-lg p-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold"><strong>Confirm</strong> Sign Up</h2>
+      <button @click="closeSignupModal" class="text-gray-500 hover:text-gray-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
     </div>
+    <p class="text-lg mb-6">Signing up for {{ locations[signupModalIndex].service }}</p>
+    <button @click="signupForLocation(signupModalIndex)" class="w-full py-3 px-6 font-semibold rounded-lg shadow-md text-white bg-blue-500 hover:bg-blue-700">
+      Sign Up
+    </button>
+    <!-- Add more content to the modal as needed -->
+  </div>
 </div>
+
+
 
 
 </template>
@@ -227,6 +254,22 @@ export default {
         zoom: 8
       });
     },
+    getCurrentLocations(){
+      // Fetch locations from the API
+      fetch('http://localhost:8000/api/locations/')
+        .then(response => response.json())
+        .then(data => {
+          // Save the locations in your component's data
+          this.locations = data;
+          // Add markers to the map for each location
+          this.locations.forEach(location => {
+            new google.maps.Marker({
+              position: { lat: location.latitude, lng: location.longitude },
+              map: this.map,
+            });
+          });
+        });
+    },
     logout() {
       localStorage.removeItem('token');
       this.$router.push('/'); // redirect to the login page
@@ -271,6 +314,32 @@ export default {
     closeSignupModal() {
         this.signupModalIndex = null;
     },
+signupForLocation(index) {
+    const location = this.locations[index];
+    console.log(location);
+    fetch(`http://localhost:8000/api/locations/${location.id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ...location,
+            volunteers: location.volunteers + 1,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const updatedLocation = data.location;
+            this.locations.splice(index, 1, updatedLocation);
+        } else {
+            console.error('Error:', data.error);
+        }
+        this.closeSignupModal();
+    })
+    .catch(error => console.error('Error:', error));
+},
+
   },
   components: {
     LoginView,
