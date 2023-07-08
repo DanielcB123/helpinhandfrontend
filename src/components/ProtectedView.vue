@@ -67,11 +67,15 @@
       <div class="w-full flex flex-col bg-green-50" @scroll="handleScroll">
         <!-- Top div -->
   <div class="w-full main-bg p-4">
-    <p>top</p>
     <div id="map" style="width: 100%; height: 400px;"></div>
-
-          <div class="w-full sm:w-full bg-blue-200 p-5 mt-4">
+          <div class="w-full sm:w-full custom-sky p-5 mt-4">
+            
             <div class="w-full sm:w-full bg-blue-200 p-5 mt-4">
+              
+              <div class="mt-6 w-full h-12 flex justify-center items-center">
+                <h2 class="text-8xl text-white" style="font-family: 'Kaushan Script', cursive;">Upcoming Services</h2>
+              </div>
+
               <table class="styled-table">
                 <thead>
                     <tr>
