@@ -1,5 +1,6 @@
 <template>
   <div class="side-nav-bg-overflow flex flex-col min-h-screen">
+    <div>
     <!-- <div class="w-full nav h-24 flex justify-between items-center">
       <div class="w-full flex justify-center mr-12 flex space-x-4">
         <a href="#" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-sky-500 hover:bg-sky-700">Home</a>
@@ -216,7 +217,7 @@
     </div>
   </div>
 
-  <!-- Your existing sign up modal -->
+  <!-- sign up modal -->
   <div v-if="signupModalIndex !== null && locations[signupModalIndex]" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="bg-white w-3/4 mx-auto rounded-lg p-8">
       <div class="flex justify-between items-center mb-4">
@@ -236,8 +237,7 @@
   </div>
 
 
-
-
+</div>
 </template>
 
 
@@ -274,9 +274,49 @@ export default {
       viewModalIndex: null,
       signupModalIndex: null,
       isMenuOpen: false,
+      userToken: null, // Add this line
+      userData: null,
     };
   },
+  created() {
+    this.userToken = localStorage.getItem('token'); 
+    console.log(this.userToken);
+    fetch('http://localhost:8000/api/current-user/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.userToken}` 
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      this.userData = data;
+      this.userID = data.id;
+      
+    })
+    .catch(error => console.error('Error:', error));
+
+    // const credentials = {
+    //   username: 'username', 
+    //   password: 'password'  
+    // };
+
+    // this.$http.post('http://localhost:8000/api/api-token-auth/', credentials)
+    //   .then(response => {
+    //     const token = response.data.token;
+    //     localStorage.setItem('token', token);
+    //     this.userToken = token;
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+  },
+
+
+
   mounted() {
+    // console.log("Mounted here -> user token: "+this.userData);
   this.$nextTick(() => {
     window.initMap = this.initMap;
     this.initMap();
@@ -399,6 +439,7 @@ signupForLocation(index) {
         if (data.status === 'success') {
             const updatedLocation = data.location;
             this.locations.splice(index, 1, updatedLocation);
+            this.signupForService(index);
             // close the signup modal
             this.closeSignupModal();
             // open the confirmation modal
@@ -409,6 +450,29 @@ signupForLocation(index) {
     })
     .catch(error => console.error('Error:', error));
 },
+signupForService(index) {
+    const location = this.locations[index];
+    console.log("HERE " + location.id);
+    console.log("user data: "+JSON.stringify(this.userData.id));
+
+    fetch('http://localhost:8000/api/servicesignup/', {  // Adjust the URL as necessary
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${this.userToken}`  // Pass the user's auth token
+        },
+        body: JSON.stringify({
+            user: this.userData.id,  // Pass the user's ID
+            service: location.id // Pass the ID of the service the user is signing up for
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response data as necessary
+         console.log(data);
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 
   },
