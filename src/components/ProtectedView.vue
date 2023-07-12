@@ -105,7 +105,7 @@
                         <td data-label="Volunteers">{{ location.volunteers }}</td> <!-- Updated to use the volunteers field -->
 
                         <td data-label="View">
-                            <button @click="openViewModal(index)" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
+                            <button @click="openViewModal(index);" class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700">
                                 View
                             </button>
                         </td>
@@ -172,12 +172,12 @@
 
 
 
-<div v-if="viewModalIndex !== null && locations[viewModalIndex]" class="fixed inset-0 flex items-center justify-center">
+<div v-if="currentService" class="fixed inset-0 flex items-center justify-center">
   <div class="fixed inset-0 bg-black bg-opacity-50"></div>
   <div class="absolute w-1/2 mx-auto my-auto bg-white rounded-lg shadow-lg">
     <div class="p-4">
       <div class="flex justify-between">
-        <h2 class="text-xl font-semibold">Location Details</h2>
+        <h2 class="text-xl font-semibold">Location & Service Details</h2>
         <button @click="closeViewModal" class="text-gray-600 hover:text-gray-800">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -185,12 +185,14 @@
         </button>
       </div>
       <hr class="my-4">
-      <p><span class="font-semibold">Service:</span> {{ locations[viewModalIndex].service }}</p>
-      <p><span class="font-semibold">Description:</span> {{ locations[viewModalIndex].service_description }}</p>
-      <p><span class="font-semibold">Location:</span> {{ locations[viewModalIndex].place_name }}</p>
-      <p><span class="font-semibold">Date:</span> {{ new Date(locations[viewModalIndex].date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) }}</p>
-      <p><span class="font-semibold">Meeting Time:</span> {{ locations[viewModalIndex].meeting_time }}</p>
-      <p><span class="font-semibold">Volunteers:</span> {{ locations[viewModalIndex].volunteers }}</p>
+      <p><span class="font-semibold">Location ID:</span> {{ locations[viewModalIndex].id }}</p>
+      <p><span class="font-semibold">Place Name:</span> {{ locations[viewModalIndex].place_name }}</p>
+      <p><span class="font-semibold">Service ID:</span> {{ currentService.id }}</p>
+      <p><span class="font-semibold">Service:</span> {{ currentService.service_name }}</p>
+      <p><span class="font-semibold">Description:</span> {{ currentService.description }}</p>
+      <p><span class="font-semibold">Date:</span> {{ new Date(currentService.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) }}</p>
+      <p><span class="font-semibold">Meeting Time:</span> {{ new Date(currentService.meeting_time).toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' }) }}</p>
+      <p><span class="font-semibold">Volunteers:</span> {{ currentService.volunteers }}</p>
     </div>
   </div>
 </div>
@@ -267,6 +269,7 @@ export default {
       confirmationModalIndex: null,
       map: null,
       locations: [],
+      serviceUsers: [],
       data: [
           { service: 'Service 1', date: 'Date 1', location: 'Location 1', volunteers: 'Volunteers 1' },
           // add more data as needed...
@@ -313,6 +316,14 @@ export default {
     //   });
   },
 
+computed: {
+  currentService: function() {
+    if (this.viewModalIndex !== null && this.locations[this.viewModalIndex]) {
+      return this.services.find(service => service.location === this.locations[this.viewModalIndex].id)
+    }
+    return null;
+  }
+},
 
 
   mounted() {
@@ -340,6 +351,18 @@ export default {
         });
       });
 
+
+    // Fetch services from the API
+    fetch('http://localhost:8000/api/services/')
+      .then(response => response.json())
+      .then(data => {
+        
+        // Save the services in your component's data
+        this.services = data;
+        // Do something with the services here
+        // console.log("Services API: "+JSON.stringify(data));
+        console.log(this.services);
+    });
 
   },
   beforeUnmount() {
@@ -369,6 +392,21 @@ export default {
           });
         });
     },
+    // fetchServiceUsers(serviceId) {
+    //     fetch('/api/service/' + serviceId + '/users/')
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         this.serviceUsers = data;
+    //     })
+    //     .catch(error => {
+    //         console.error('There has been a problem with your fetch operation:', error);
+    //     });
+    // },
     logout() {
       localStorage.removeItem('token');
       this.$router.push('/'); // redirect to the login page
@@ -455,20 +493,20 @@ signupForService(index) {
     console.log("HERE " + location.id);
     console.log("user data: "+JSON.stringify(this.userData.id));
 
-    fetch('http://localhost:8000/api/servicesignup/', {  // Adjust the URL as necessary
+    fetch('http://localhost:8000/api/servicesignup/', {  
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Token ${this.userToken}`  // Pass the user's auth token
+            'Authorization': `Token ${this.userToken}`  
         },
         body: JSON.stringify({
-            user: this.userData.id,  // Pass the user's ID
-            service: location.id // Pass the ID of the service the user is signing up for
+            user: this.userData.id,  
+            service: location.id 
         }),
     })
     .then(response => response.json())
     .then(data => {
-        // Handle the response data as necessary
+       
          console.log(data);
     })
     .catch(error => console.error('Error:', error));
