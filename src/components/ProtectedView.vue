@@ -192,7 +192,29 @@
       <p><span class="font-semibold">Description:</span> {{ currentService.description }}</p>
       <p><span class="font-semibold">Date:</span> {{ new Date(currentService.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) }}</p>
       <p><span class="font-semibold">Meeting Time:</span> {{ new Date(currentService.meeting_time).toLocaleTimeString('en-US', { hour: '2-digit', minute:'2-digit' }) }}</p>
-      <p><span class="font-semibold">Volunteers:</span> {{ currentService.volunteers }}</p>
+
+      <div v-if="currentService.volunteers.length > 0">
+        <table class="table-fixed">
+          <thead>
+            <tr>
+              <th class="w-1/2">Username</th>
+              <th class="w-1/2">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="userId in currentService.volunteers" :key="userId">
+              <td v-if="userInfo[userId]">{{ userInfo[userId].username }}</td>
+              <td v-if="userInfo[userId]">{{ userInfo[userId].email }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-else>
+        No volunteers found.
+      </div>
+
+
+        
     </div>
   </div>
 </div>
@@ -279,6 +301,8 @@ export default {
       isMenuOpen: false,
       userToken: null, // Add this line
       userData: null,
+      serviceVolunteers: [],
+      userInfo: {},
     };
   },
   created() {
@@ -293,7 +317,7 @@ export default {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      console.log("omg "+JSON.stringify(data));
       this.userData = data;
       this.userID = data.id;
       
@@ -315,7 +339,14 @@ export default {
     //     console.error(error);
     //   });
   },
-
+  watch: {
+    currentService: {
+      handler() {
+        this.fetchUserInfos();
+      },
+      deep: true,
+    }
+  },
 computed: {
   currentService: function() {
     if (this.viewModalIndex !== null && this.locations[this.viewModalIndex]) {
@@ -376,6 +407,17 @@ computed: {
         zoom: 8
       });
     },
+    // Get user info to display all volunteers at View button on table of services
+  async fetchUserInfos() {
+    if (this.currentService) {
+      const promises = this.currentService.volunteers.map(userId => this.getUserInfo(userId));
+      const userInfos = await Promise.all(promises);
+      this.userInfo = userInfos.reduce((acc, curr, idx) => {
+        acc[this.currentService.volunteers[idx]] = curr;
+        return acc;
+      }, {});
+    }
+  },
     getCurrentLocations(){
       // Fetch locations from the API
       fetch('http://localhost:8000/api/locations/')
@@ -407,6 +449,26 @@ computed: {
     //         console.error('There has been a problem with your fetch operation:', error);
     //     });
     // },
+getUserInfo(userId) {
+  console.log('userId: ' + userId);
+  return fetch(`http://localhost:8000/api/users/${userId}/`)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        // handle error...
+      }
+    })
+    .then(user => {
+      console.log('success: ' + JSON.stringify(user));
+      return user;
+    })
+    .catch(error => {
+      console.error(error);
+      // handle error...
+    });
+},
+
     logout() {
       localStorage.removeItem('token');
       this.$router.push('/'); // redirect to the login page
@@ -491,7 +553,7 @@ signupForLocation(index) {
 signupForService(index) {
     const location = this.locations[index];
     console.log("HERE " + location.id);
-    console.log("user data: "+JSON.stringify(this.userData.id));
+    console.log(this.userData.email);
 
     fetch('http://localhost:8000/api/servicesignup/', {  
         method: 'POST',
